@@ -33,15 +33,8 @@
 
 - (void) setResultInfo: (NSString *) info
 {
-    dispatch_block_t block = ^
-    {
-        self.resultTextView.text = info;
-    };
-    if ([NSThread isMainThread]){
-        block();
-    }else{
-        dispatch_sync(dispatch_get_main_queue(), block);
-    }
+    
+    self.resultTextView.text = info;
 }
 
 @end

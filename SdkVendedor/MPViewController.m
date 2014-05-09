@@ -52,12 +52,16 @@
                                 onSuccess:^(NSDictionary *json, NSInteger statusCode){
                                     NSLog(@"Success create token, json response is %@",json);
                                     NSString *result = [NSString stringWithFormat:@"Info posted ok! response = %@",json];
-                                    [resultController setResultInfo:result];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [resultController setResultInfo:result];
+                                    });
                                 }
                                 onFailure:^(NSDictionary *json, NSInteger statusCode, NSError *error){
                                     NSLog(@"Error create token, json response is %@ and error is %@",json,error);
                                     NSString *result = [NSString stringWithFormat:@"Error! json response is %@ and error is %@",json,error];
-                                    [resultController setResultInfo:result];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [resultController setResultInfo:result];
+                                    });
                                 }
         ];
     }
