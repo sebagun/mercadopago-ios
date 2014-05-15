@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 MercadoPago. All rights reserved.
 //
 
-#import "MPCardInfo.h"
+#import "MPCardTokenRequestData.h"
 
-@implementation MPCardInfo
+@implementation MPCardTokenRequestData
 
 @end

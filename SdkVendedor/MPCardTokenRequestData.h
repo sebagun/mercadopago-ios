@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MPCardInfo : NSObject
+@interface MPCardTokenRequestData : NSObject
 
 @property (nonatomic, strong) NSString *cardNumber;
 @property (nonatomic, strong) NSNumber *securityCode;
@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSNumber *expirationYear;
 @property (nonatomic, strong) NSString *cardholderName;
 @property (nonatomic, strong) NSString *docType;
+@property (nonatomic, strong) NSString *docSubType;
 @property (nonatomic, strong) NSString *docNumber;
 
 @end

@@ -24,8 +24,16 @@
 		CF6A0239191933C900A8ACB5 /* MPRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0238191933C900A8ACB5 /* MPRequestService.m */; };
 		CF6A023D191A659000A8ACB5 /* MPJSONRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A023C191A659000A8ACB5 /* MPJSONRestClient.m */; };
 		CF6A0241191AB8E100A8ACB5 /* MPCheckout.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0240191AB8E100A8ACB5 /* MPCheckout.m */; };
-		CF6A0244191BC0E100A8ACB5 /* MPCardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0243191BC0E100A8ACB5 /* MPCardInfo.m */; };
+		CF6A0244191BC0E100A8ACB5 /* MPCardTokenRequestData.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0243191BC0E100A8ACB5 /* MPCardTokenRequestData.m */; };
 		CF6A0247191BFD2A00A8ACB5 /* MPResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0246191BFD2A00A8ACB5 /* MPResultViewController.m */; };
+		CF6A024B1921190200A8ACB5 /* MPPaymentMethodInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A024A1921190200A8ACB5 /* MPPaymentMethodInfo.m */; };
+		CF6A024E192119AB00A8ACB5 /* MPCardIssuerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A024D192119AB00A8ACB5 /* MPCardIssuerInfo.m */; };
+		CF6A0251192119BE00A8ACB5 /* MPPayerCostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0250192119BE00A8ACB5 /* MPPayerCostInfo.m */; };
+		CF6A025419211A4800A8ACB5 /* MPCardConfigurationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A025319211A4800A8ACB5 /* MPCardConfigurationInfo.m */; };
+		CF6A025719211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A025619211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.m */; };
+		CF6A025A1921414500A8ACB5 /* MPCardTokenResponseData.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A02591921414500A8ACB5 /* MPCardTokenResponseData.m */; };
+		CF6A025D1922BABA00A8ACB5 /* MPAdvancedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A025C1922BABA00A8ACB5 /* MPAdvancedViewController.m */; };
+		CF6A02601923E32800A8ACB5 /* MPAdvanced2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A025F1923E32800A8ACB5 /* MPAdvanced2ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,10 +72,26 @@
 		CF6A023C191A659000A8ACB5 /* MPJSONRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPJSONRestClient.m; sourceTree = "<group>"; };
 		CF6A023F191AB8E100A8ACB5 /* MPCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCheckout.h; sourceTree = "<group>"; };
 		CF6A0240191AB8E100A8ACB5 /* MPCheckout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCheckout.m; sourceTree = "<group>"; };
-		CF6A0242191BC0E100A8ACB5 /* MPCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCardInfo.h; sourceTree = "<group>"; };
-		CF6A0243191BC0E100A8ACB5 /* MPCardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCardInfo.m; sourceTree = "<group>"; };
+		CF6A0242191BC0E100A8ACB5 /* MPCardTokenRequestData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCardTokenRequestData.h; sourceTree = "<group>"; };
+		CF6A0243191BC0E100A8ACB5 /* MPCardTokenRequestData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCardTokenRequestData.m; sourceTree = "<group>"; };
 		CF6A0245191BFD2A00A8ACB5 /* MPResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPResultViewController.h; sourceTree = "<group>"; };
 		CF6A0246191BFD2A00A8ACB5 /* MPResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPResultViewController.m; sourceTree = "<group>"; };
+		CF6A02491921190200A8ACB5 /* MPPaymentMethodInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPaymentMethodInfo.h; sourceTree = "<group>"; };
+		CF6A024A1921190200A8ACB5 /* MPPaymentMethodInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPaymentMethodInfo.m; sourceTree = "<group>"; };
+		CF6A024C192119AB00A8ACB5 /* MPCardIssuerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCardIssuerInfo.h; sourceTree = "<group>"; };
+		CF6A024D192119AB00A8ACB5 /* MPCardIssuerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCardIssuerInfo.m; sourceTree = "<group>"; };
+		CF6A024F192119BE00A8ACB5 /* MPPayerCostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPPayerCostInfo.h; sourceTree = "<group>"; };
+		CF6A0250192119BE00A8ACB5 /* MPPayerCostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPPayerCostInfo.m; sourceTree = "<group>"; };
+		CF6A025219211A4800A8ACB5 /* MPCardConfigurationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCardConfigurationInfo.h; sourceTree = "<group>"; };
+		CF6A025319211A4800A8ACB5 /* MPCardConfigurationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCardConfigurationInfo.m; sourceTree = "<group>"; };
+		CF6A025519211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPExceptionsByCardIssuerInfo.h; sourceTree = "<group>"; };
+		CF6A025619211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPExceptionsByCardIssuerInfo.m; sourceTree = "<group>"; };
+		CF6A02581921414500A8ACB5 /* MPCardTokenResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPCardTokenResponseData.h; sourceTree = "<group>"; };
+		CF6A02591921414500A8ACB5 /* MPCardTokenResponseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCardTokenResponseData.m; sourceTree = "<group>"; };
+		CF6A025B1922BABA00A8ACB5 /* MPAdvancedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPAdvancedViewController.h; sourceTree = "<group>"; };
+		CF6A025C1922BABA00A8ACB5 /* MPAdvancedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPAdvancedViewController.m; sourceTree = "<group>"; };
+		CF6A025E1923E32800A8ACB5 /* MPAdvanced2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPAdvanced2ViewController.h; sourceTree = "<group>"; };
+		CF6A025F1923E32800A8ACB5 /* MPAdvanced2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPAdvanced2ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +154,10 @@
 				CF6A02111919338100A8ACB5 /* MPAppDelegate.h */,
 				CF6A02121919338100A8ACB5 /* MPAppDelegate.m */,
 				CF6A02141919338100A8ACB5 /* Main.storyboard */,
+				CF6A025B1922BABA00A8ACB5 /* MPAdvancedViewController.h */,
+				CF6A025C1922BABA00A8ACB5 /* MPAdvancedViewController.m */,
+				CF6A025E1923E32800A8ACB5 /* MPAdvanced2ViewController.h */,
+				CF6A025F1923E32800A8ACB5 /* MPAdvanced2ViewController.m */,
 				CF6A02171919338100A8ACB5 /* MPViewController.h */,
 				CF6A02181919338100A8ACB5 /* MPViewController.m */,
 				CF6A0245191BFD2A00A8ACB5 /* MPResultViewController.h */,
@@ -175,14 +203,13 @@
 			children = (
 				CF6A023F191AB8E100A8ACB5 /* MPCheckout.h */,
 				CF6A0240191AB8E100A8ACB5 /* MPCheckout.m */,
-				CF6A0242191BC0E100A8ACB5 /* MPCardInfo.h */,
-				CF6A0243191BC0E100A8ACB5 /* MPCardInfo.m */,
-				CF6A023E191A6E2200A8ACB5 /* request */,
+				CF6A0248192118C900A8ACB5 /* dto */,
+				CF6A023E191A6E2200A8ACB5 /* rest client */,
 			);
 			name = sdk;
 			sourceTree = "<group>";
 		};
-		CF6A023E191A6E2200A8ACB5 /* request */ = {
+		CF6A023E191A6E2200A8ACB5 /* rest client */ = {
 			isa = PBXGroup;
 			children = (
 				CF6A023B191A659000A8ACB5 /* MPJSONRestClient.h */,
@@ -190,7 +217,28 @@
 				CF6A0237191933C900A8ACB5 /* MPRequestService.h */,
 				CF6A0238191933C900A8ACB5 /* MPRequestService.m */,
 			);
-			name = request;
+			name = "rest client";
+			sourceTree = "<group>";
+		};
+		CF6A0248192118C900A8ACB5 /* dto */ = {
+			isa = PBXGroup;
+			children = (
+				CF6A0242191BC0E100A8ACB5 /* MPCardTokenRequestData.h */,
+				CF6A0243191BC0E100A8ACB5 /* MPCardTokenRequestData.m */,
+				CF6A02581921414500A8ACB5 /* MPCardTokenResponseData.h */,
+				CF6A02591921414500A8ACB5 /* MPCardTokenResponseData.m */,
+				CF6A02491921190200A8ACB5 /* MPPaymentMethodInfo.h */,
+				CF6A024A1921190200A8ACB5 /* MPPaymentMethodInfo.m */,
+				CF6A024C192119AB00A8ACB5 /* MPCardIssuerInfo.h */,
+				CF6A024D192119AB00A8ACB5 /* MPCardIssuerInfo.m */,
+				CF6A024F192119BE00A8ACB5 /* MPPayerCostInfo.h */,
+				CF6A0250192119BE00A8ACB5 /* MPPayerCostInfo.m */,
+				CF6A025219211A4800A8ACB5 /* MPCardConfigurationInfo.h */,
+				CF6A025319211A4800A8ACB5 /* MPCardConfigurationInfo.m */,
+				CF6A025519211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.h */,
+				CF6A025619211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.m */,
+			);
+			name = dto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,11 +341,19 @@
 			files = (
 				CF6A0239191933C900A8ACB5 /* MPRequestService.m in Sources */,
 				CF6A020F1919338100A8ACB5 /* main.m in Sources */,
+				CF6A0251192119BE00A8ACB5 /* MPPayerCostInfo.m in Sources */,
 				CF6A02191919338100A8ACB5 /* MPViewController.m in Sources */,
 				CF6A023D191A659000A8ACB5 /* MPJSONRestClient.m in Sources */,
+				CF6A024B1921190200A8ACB5 /* MPPaymentMethodInfo.m in Sources */,
+				CF6A025719211A9C00A8ACB5 /* MPExceptionsByCardIssuerInfo.m in Sources */,
+				CF6A024E192119AB00A8ACB5 /* MPCardIssuerInfo.m in Sources */,
+				CF6A025419211A4800A8ACB5 /* MPCardConfigurationInfo.m in Sources */,
 				CF6A0241191AB8E100A8ACB5 /* MPCheckout.m in Sources */,
-				CF6A0244191BC0E100A8ACB5 /* MPCardInfo.m in Sources */,
+				CF6A02601923E32800A8ACB5 /* MPAdvanced2ViewController.m in Sources */,
+				CF6A025D1922BABA00A8ACB5 /* MPAdvancedViewController.m in Sources */,
+				CF6A0244191BC0E100A8ACB5 /* MPCardTokenRequestData.m in Sources */,
 				CF6A0247191BFD2A00A8ACB5 /* MPResultViewController.m in Sources */,
+				CF6A025A1921414500A8ACB5 /* MPCardTokenResponseData.m in Sources */,
 				CF6A02131919338100A8ACB5 /* MPAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +559,7 @@
 				CF6A02331919338200A8ACB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF6A02341919338200A8ACB5 /* Build configuration list for PBXNativeTarget "SdkVendedorTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +568,7 @@
 				CF6A02361919338200A8ACB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
