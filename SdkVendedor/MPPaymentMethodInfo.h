@@ -26,4 +26,6 @@
 @property (nonatomic,strong) NSArray *exceptionsByCardIssuer; //array of MPExceptionsByCardIssuerInfo
 @property (nonatomic,strong) NSArray *cardConfiguration; //array of MPCardConfigurationInfo
 
+- (NSString *) description;
+
 @end

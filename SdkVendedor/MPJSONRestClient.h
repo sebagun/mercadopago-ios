@@ -9,10 +9,10 @@
 #import "MPRequestService.h"
 
 //Handle sucessful responses
-typedef void (^MPSuccessRequestHandler)(NSDictionary *json, NSInteger statusCode);
+typedef void (^MPSuccessRequestHandler)(id json, NSInteger statusCode);
 
 //Handle NSErrors and HTTP error status codes. If there's a json response then json won't be nil
-typedef void (^MPFailureRequestHandler)(NSDictionary *json, NSInteger statusCode, NSError *error);
+typedef void (^MPFailureRequestHandler)(id json, NSInteger statusCode, NSError *error);
 
 @interface MPJSONRestClient : MPRequestService
 
@@ -21,7 +21,7 @@ typedef void (^MPFailureRequestHandler)(NSDictionary *json, NSInteger statusCode
 - (instancetype) initWithHeaders:(NSDictionary *)headers;
 
 - (void) getJSONFromUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
-- (void) postJSON:(NSDictionary *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
+- (void) postJSON:(id)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
 - (void) postJSONString:(NSString *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
 
 @end

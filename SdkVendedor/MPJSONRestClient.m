@@ -44,7 +44,7 @@
     [self getDataFromUrl:urlString onComplention:onCompletion];
 }
 
-- (void) postJSON:(NSDictionary *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
+- (void) postJSON:(id)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
 {
     if([NSJSONSerialization isValidJSONObject:json]){
         MPRequestCompletionHandler onCompletion = [self complationHandlerWithSucess:success andFailure:failure];
@@ -82,7 +82,7 @@
             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
             if (httpResp.statusCode == 200 || httpResp.statusCode == 201) {
                 NSError *errorParsing;
-                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                id json = [NSJSONSerialization JSONObjectWithData:data
                                                                      options:kNilOptions
                                                                        error:&errorParsing];
                 if (errorParsing) {
@@ -95,7 +95,7 @@
                 //check if response is json data
                 if ([[[httpResp allHeaderFields] objectForKey:@"Content-Type"] rangeOfString:@"application/json"].location != NSNotFound) {
                     NSError *errorParsing;
-                    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                    id json = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:kNilOptions
                                                                            error:&errorParsing];
                     failure(json,httpResp.statusCode,error); //just original error

@@ -11,6 +11,7 @@
 #import "MPPayerCostInfo.h"
 #import "MPExceptionsByCardIssuerInfo.h"
 #import "MPCardConfigurationInfo.h"
+#import "MPValidators.h"
 
 @interface MPCheckout ()
 
@@ -118,7 +119,7 @@
     [cardholder setObject:document forKey:@"document"];
     [json setObject:cardholder forKey:@"cardholder"];
     
-    MPSuccessRequestHandler successHandler = ^(NSDictionary *json, NSInteger statusCode){
+    MPSuccessRequestHandler successHandler = ^(id json, NSInteger statusCode){
         MPCardTokenResponseData *card = [[MPCardTokenResponseData alloc] init];
         card.cardId = [json objectForKey:@"card_id"];
         card.luhnValidation = [(NSNumber *)[json objectForKey:@"luhn_validation"] boolValue];
@@ -141,7 +142,7 @@
         success(card);
     };
     
-    MPFailureRequestHandler failureHandler = ^(NSDictionary *json, NSInteger statusCode, NSError *error){
+    MPFailureRequestHandler failureHandler = ^(id json, NSInteger statusCode, NSError *error){
         failure(error); //TODO: por ahora paso el error y tiro lo demas a la basura... armar mejor NSError
     };
     
@@ -151,19 +152,37 @@
 
 - (void) paymentMethodInfoForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethodInfo *)) success onFailure:(void (^)(NSError *)) failure
 {
-    if (!bin || [bin isEqualToString:@""]) {
+    NSError *validationError;
+    [MPValidators validateCardBin:bin error:&validationError];
+    
+    if (validationError) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                        ^(){
-                           failure([NSError errorWithDomain:@"card_input_error" code:1 userInfo:@{@"description":@"invalid card bin"}]);
+                           failure(validationError);
                        }
-                       );
+        );
+    }
+    
+    NSString *cleaneBin = [bin substringToIndex:5];
+    
+    MPPaymentMethodInfo *exists = [self.paymentMethodsCache objectForKey:cleaneBin];
+    if (exists) {
+        NSLog(@"cache hit");
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                       ^(){
+                           success(exists);
+                       }
+        );
+        return;
     }
     
     MPJSONRestClient *client = [[MPJSONRestClient alloc] init];
     
     //on success, cache the payment and then executes the success
-    MPSuccessRequestHandler s = ^(NSDictionary *json, NSInteger statusCode){
-        //TODO [self.paymentMethodsCache setObject:json forKey:[json valueForKey:@"id"]];
+    MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
+        
+        NSDictionary *json = [(NSArray *)jsonArr objectAtIndex:0]; //TODO search for recommended payment method
+        
         MPPaymentMethodInfo *p = [[MPPaymentMethodInfo alloc]init];
         p.paymentMethodId = [json objectForKey:@"id"];
         p.name = [json objectForKey:@"name"];
@@ -182,14 +201,17 @@
         p.exceptionsByCardIssuer = [self exceptionsByCardIssuerFromJson:[json objectForKey:@"exceptions_by_card_issuer"]];
         p.cardConfiguration = [self cardConfigurationFromJson:[json objectForKey:@"card_configuration"]];
 
+        [self.paymentMethodsCache setObject:p forKey:[json valueForKey:@"id"]];
+        [self.paymentMethodsCache setObject:p forKey:cleaneBin];
+        
         success(p);
     };
     
-    MPFailureRequestHandler failureHandler = ^(NSDictionary *json, NSInteger statusCode, NSError *error){
+    MPFailureRequestHandler failureHandler = ^(id json, NSInteger statusCode, NSError *error){
         failure(error); //TODO: por ahora paso el error y tiro lo demas a la basura... armar mejor NSError
     };
     
-    [client getJSONFromUrl: [NSString stringWithFormat:@"https://api.mercadolibre.com/checkout/custom/payment_methods/search?public_key=%@&bin=%@",self.publishableKey, bin] onSuccess:s onFailure:failureHandler];
+    [client getJSONFromUrl: [NSString stringWithFormat:@"https://api.mercadolibre.com/checkout/custom/payment_methods/search?public_key=%@&bin=%@",self.publishableKey, cleaneBin] onSuccess:s onFailure:failureHandler];
     
 }
 
