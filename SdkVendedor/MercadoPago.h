@@ -12,7 +12,7 @@
 #import "MPCardTokenResponseData.h"
 #import "MPPaymentMethodInfo.h"
 
-@interface MPCheckout : NSObject
+@interface MercadoPago : NSObject
 
 //Your MercadoPago public key
 @property (nonatomic,strong) NSString *publishableKey;

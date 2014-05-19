@@ -10,7 +10,9 @@
 
 @interface MPValidators : NSObject
 
+//the card bin is the first six numbers of the credit card
 +(void) validateCardBin:(NSString *)bin error:(NSError **) error;
+
 +(BOOL) isNumericString: (NSString *) aString;
 
 @end

@@ -6,16 +6,19 @@
 //  Copyright (c) 2014 MercadoPago. All rights reserved.
 //
 
-#import "MPCheckout.h"
+#import "MercadoPago.h"
 #import "MPJSONRestClient.h"
 #import "MPPayerCostInfo.h"
 #import "MPExceptionsByCardIssuerInfo.h"
 #import "MPCardConfigurationInfo.h"
 #import "MPValidators.h"
+#import "MPTrustDefenderDelegate.h"
 
-@interface MPCheckout ()
+@interface MercadoPago ()
 
-@property (nonatomic, strong) NSMutableDictionary *paymentMethodsCache;
+@property (nonatomic, strong) NSMutableDictionary *paymentMethodsCache; //not in use right now
+@property (nonatomic, strong) MPTrustDefenderDelegate *profileDelegate;
+@property (nonatomic, strong) TrustDefenderMobile *profile;
 
 - (void) searchPaymentMethodById: (NSString *) paymentMethodId onSuccess:(MPSuccessRequestHandler) success onFailure:(MPFailureRequestHandler) failure;
 
@@ -28,7 +31,7 @@
 
 @end
 
-@implementation MPCheckout
+@implementation MercadoPago
 
 - (void) createTokenWithCardInfo:(MPCardTokenRequestData *) info onSuccess:(void (^)(MPCardTokenResponseData *)) success onFailure:(void (^)(NSError *)) failure
 {
@@ -139,6 +142,11 @@
         card.docType = [(NSDictionary *)[(NSDictionary *)[json objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"type"];
         card.dueDate = [json objectForKey:@"due_date"];
         
+        //TODO: ver esto bien!!
+        self.profile.sessionID = card.tokenId;
+        self.profile.delegate = self.profileDelegate;
+        [self.profile doProfileRequestFor:@"jk96mpy0"];
+        
         success(card);
     };
     
@@ -165,7 +173,7 @@
     
     NSString *cleaneBin = [bin substringToIndex:5];
     
-    MPPaymentMethodInfo *exists = [self.paymentMethodsCache objectForKey:cleaneBin];
+    /*MPPaymentMethodInfo *exists = [self.paymentMethodsCache objectForKey:cleaneBin];
     if (exists) {
         NSLog(@"cache hit");
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
@@ -174,7 +182,7 @@
                        }
         );
         return;
-    }
+    }*/
     
     MPJSONRestClient *client = [[MPJSONRestClient alloc] init];
     
@@ -201,8 +209,8 @@
         p.exceptionsByCardIssuer = [self exceptionsByCardIssuerFromJson:[json objectForKey:@"exceptions_by_card_issuer"]];
         p.cardConfiguration = [self cardConfigurationFromJson:[json objectForKey:@"card_configuration"]];
 
-        [self.paymentMethodsCache setObject:p forKey:[json valueForKey:@"id"]];
-        [self.paymentMethodsCache setObject:p forKey:cleaneBin];
+        //[self.paymentMethodsCache setObject:p forKey:[json valueForKey:@"id"]];
+        //[self.paymentMethodsCache setObject:p forKey:cleaneBin];
         
         success(p);
     };
@@ -304,6 +312,22 @@
         _paymentMethodsCache = [NSMutableDictionary dictionary];
     }
     return _paymentMethodsCache;
+}
+
+-(TrustDefenderMobile *) profile
+{
+    if (!_profile) {
+        _profile = [[TrustDefenderMobile alloc] init];
+    }
+    return _profile;
+}
+
+-(MPTrustDefenderDelegate *) profileDelegate
+{
+    if (!_profileDelegate) {
+        _profileDelegate = [[MPTrustDefenderDelegate alloc]init];
+    }
+    return _profileDelegate;
 }
 
 @end
