@@ -44,14 +44,15 @@
 #pragma mark -
 #pragma mark Requests
 
-- (void) getDataFromUrl:(NSString *)urlString onComplention:(MPRequestCompletionHandler)onCompletion
+- (NSURLSessionDataTask *) getDataFromUrl:(NSString *)urlString onComplention:(MPRequestCompletionHandler)onCompletion
 {
     NSURL * url = [NSURL URLWithString:urlString];
     NSURLSessionDataTask * dataTask = [self.session dataTaskWithURL:url completionHandler:onCompletion];
     [dataTask resume];
+    return dataTask;
 }
 
-- (void) postData:(NSData *)data toUrl:(NSString *)urlString onCompletion:(MPRequestCompletionHandler)onCompletion
+- (NSURLSessionDataTask *) postData:(NSData *)data toUrl:(NSString *)urlString onCompletion:(MPRequestCompletionHandler)onCompletion
 {
     NSURL * url = [NSURL URLWithString:urlString];
     NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
@@ -59,6 +60,7 @@
     [urlRequest setHTTPBody:data];
     NSURLSessionDataTask * dataTask = [self.session dataTaskWithRequest:urlRequest completionHandler:onCompletion];
     [dataTask resume];
+    return dataTask;
 }
 
 @end

@@ -22,8 +22,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading possible shares ..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UK-Qu-QPM">
-                                <rect key="frame" x="20" y="236" width="206" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading possible installments ..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UK-Qu-QPM">
+                                <rect key="frame" x="20" y="236" width="247" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -89,9 +89,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="installmentsLabel" destination="0UK-Qu-QPM" id="Yqf-37-CPW"/>
+                        <outlet property="installmentsPicker" destination="iH1-H1-ApF" id="Tx1-Qd-7i6"/>
                         <outlet property="numberTextField" destination="sF6-BN-Yyi" id="QNL-5e-qZV"/>
-                        <outlet property="sharesLabel" destination="0UK-Qu-QPM" id="yYD-e9-aZ0"/>
-                        <outlet property="sharesPicker" destination="iH1-H1-ApF" id="T47-aC-8wh"/>
                         <outlet property="totalAmountLabel" destination="Kgd-8Y-AUm" id="aBr-oA-JeF"/>
                     </connections>
                 </viewController>

@@ -20,8 +20,11 @@ typedef void (^MPFailureRequestHandler)(id json, NSInteger statusCode, NSError *
 - (instancetype) init;
 - (instancetype) initWithHeaders:(NSDictionary *)headers;
 
-- (void) getJSONFromUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
-- (void) postJSON:(id)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
-- (void) postJSONString:(NSString *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
+/*
+ Return the DataTask so you can cancel from the outside whenever you want
+ */
+- (NSURLSessionDataTask *) getJSONFromUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
+- (NSURLSessionDataTask *) postJSON:(id)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
+- (NSURLSessionDataTask *) postJSONString:(NSString *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure;
 
 @end

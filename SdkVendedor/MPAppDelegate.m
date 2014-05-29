@@ -7,12 +7,17 @@
 //
 
 #import "MPAppDelegate.h"
+#import "MercadoPago.h"
 
 @implementation MPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //TODO: your publishable key
+    [MercadoPago setPublishableKey:@"841d020b-1077-4742-ad55-7888a0f5aefa"];
+    
     return YES;
 }
 							

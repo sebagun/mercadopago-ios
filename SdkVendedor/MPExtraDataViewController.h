@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MercadoPago.h"
-#import "MPCardTokenRequestData.h"
+#import "MPCard.h"
 
 @interface MPExtraDataViewController : UIViewController
 
-//warning: strong?
-@property (strong, nonatomic) MercadoPago *mercadopago;
-@property (strong, nonatomic) MPCardTokenRequestData *card;
+@property (strong, nonatomic) MPCard *card;
 
 @end

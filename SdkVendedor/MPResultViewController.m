@@ -9,8 +9,8 @@
 #import "MPResultViewController.h"
 
 @interface MPResultViewController ()
-@property (weak, nonatomic) IBOutlet UITextView *resultTextView;
 
+@property (weak, nonatomic) IBOutlet UITextView *resultTextView;
 
 @end
 

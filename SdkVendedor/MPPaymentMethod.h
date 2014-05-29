@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPCardIssuerInfo.h"
-#import "MPCardConfigurationInfo.h"
+#import "MPCardIssuer.h"
+#import "MPCardConfiguration.h"
 
-@interface MPPaymentMethodInfo : NSObject
+@interface MPPaymentMethod : NSObject
 
 @property (nonatomic,strong) NSString *paymentMethodId;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *paymentTypeId;
-@property (nonatomic,strong) MPCardIssuerInfo *issuerInfo;
+@property (nonatomic,strong) MPCardIssuer *issuerInfo;
 @property (nonatomic,strong) NSString *siteId;
 @property (nonatomic,strong) NSString *secureThumbnail;
 @property (nonatomic,strong) NSString *thumbnail;
@@ -26,6 +26,10 @@
 @property (nonatomic,strong) NSArray *exceptionsByCardIssuer; //array of MPExceptionsByCardIssuerInfo
 @property (nonatomic,strong) NSArray *cardConfiguration; //array of MPCardConfigurationInfo
 
-- (NSString *) description;
+/*
+ This method should not be invoked in your code. This is used by MercadoPago to retrieve 
+ payment method data using a MercadoPago API response
+ */
+- (instancetype) initFromDictionary: (NSDictionary *) dict;
 
 @end

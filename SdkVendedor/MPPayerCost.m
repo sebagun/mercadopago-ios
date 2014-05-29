@@ -6,22 +6,15 @@
 //  Copyright (c) 2014 MercadoPago. All rights reserved.
 //
 
-#import "MPPayerCostInfo.h"
+#import "MPPayerCost.h"
 
-@interface MPPayerCostInfo ()
+@interface MPPayerCost ()
 
 @property (nonatomic,strong) NSDecimalNumberHandler *roundPlain;
 
-//TODO cache the operations
-/*
-@property (nonatomic,strong) NSDecimalNumber *lastAmount; //last amount used
-@property (nonatomic,strong) NSDecimalNumber *lastShareAmount; //share amount for the last amount used
-@property (nonatomic,strong) NSDecimalNumber *lastTotalAmount; //total amount for the last amount used
-*/
-
 @end
 
-@implementation MPPayerCostInfo
+@implementation MPPayerCost
 
 - (NSDecimalNumberHandler *) roundPlain
 {
@@ -37,7 +30,7 @@
     return _roundPlain;
 }
 
-- (NSDecimalNumber *) shareAmountForAmount:(NSDecimalNumber *) amount
+- (NSDecimalNumber *) installmentAmountForAmount:(NSDecimalNumber *) amount
 {
     if (amount && self.minAllowedAmount && self.maxAllowedAmount && [amount compare: self.minAllowedAmount] == NSOrderedDescending && [amount compare: self.maxAllowedAmount] == NSOrderedAscending) {
         if ([self.installmentRate floatValue] > 0.0) {
@@ -68,7 +61,7 @@
     if (amount && self.minAllowedAmount && self.maxAllowedAmount && [amount compare: self.minAllowedAmount] == NSOrderedDescending && [amount compare: self.maxAllowedAmount] == NSOrderedAscending) {
         if ([self.installmentRate floatValue] > 0.0) {
             //share*installments
-            NSDecimalNumber *share = [self shareAmountForAmount:amount];
+            NSDecimalNumber *share = [self installmentAmountForAmount:amount];
             NSDecimalNumber *installments = [NSDecimalNumber decimalNumberWithDecimal:[self.installments decimalValue]];
             return [share decimalNumberByMultiplyingBy:installments withBehavior:self.roundPlain];
         }else{
@@ -76,6 +69,18 @@
         }
     }
     return nil;
+}
+
+- (instancetype) initFromDictionary: (NSDictionary *) dict
+{
+    if (self = [super init]) {
+        self.installments = [dict objectForKey:@"installments"];
+        self.installmentRate = [dict objectForKey:@"installment_rate"];
+        self.labels = [dict objectForKey:@"labels"];
+        self.minAllowedAmount = [dict objectForKey:@"min_allowed_amount"];
+        self.maxAllowedAmount = [dict objectForKey:@"max_allowed_amount"];
+    }
+    return self;
 }
 
 @end

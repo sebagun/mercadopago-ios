@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MPPayerCostInfo : NSObject
+@interface MPPayerCost : NSObject
 
 @property (nonatomic,strong) NSNumber *installments;
 @property (nonatomic,strong) NSNumber *installmentRate;
@@ -16,7 +16,13 @@
 @property (nonatomic,strong) NSNumber *minAllowedAmount;
 @property (nonatomic,strong) NSNumber *maxAllowedAmount;
 
-- (NSDecimalNumber *) shareAmountForAmount:(NSDecimalNumber *) amount; //amount per share
+- (NSDecimalNumber *) installmentAmountForAmount:(NSDecimalNumber *) amount; //amount per installment
 - (NSDecimalNumber *) totalAmountForAmount:(NSDecimalNumber *) amount; //total amount for a payment with installments
+
+/*
+ This method should not be invoked in your code. This is used by MercadoPago to retrieve
+ payment method data using a MercadoPago API response
+ */
+- (instancetype) initFromDictionary: (NSDictionary *) dict;
 
 @end

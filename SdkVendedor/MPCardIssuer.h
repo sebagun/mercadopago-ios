@@ -8,9 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MPCardIssuerInfo : NSObject
+@interface MPCardIssuer : NSObject
 
 @property (nonatomic,strong) NSNumber *issuerId;
 @property (nonatomic,strong) NSString *name;
+
+/*
+ This method should not be invoked in your code. This is used by MercadoPago to retrieve
+ payment method data using a MercadoPago API response
+ */
+- (instancetype) initFromDictionary: (NSDictionary *) dict;
 
 @end

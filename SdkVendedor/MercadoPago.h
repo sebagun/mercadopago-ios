@@ -8,19 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "MPJSONRestClient.h"
-#import "MPCardTokenRequestData.h"
-#import "MPCardTokenResponseData.h"
-#import "MPPaymentMethodInfo.h"
+#import "MPCard.h"
+#import "MPCardToken.h"
+#import "MPPaymentMethod.h"
 
 @interface MercadoPago : NSObject
 
-//Your MercadoPago public key
-@property (nonatomic,strong) NSString *publishableKey;
+//Your MercadoPago public key.
++ (NSString *) publishableKey;
++ (void) setPublishableKey: (NSString *) key;
 
-//gets the payment method info for the card bin (first six numbers)
-- (void) paymentMethodInfoForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethodInfo *)) success onFailure:(void (^)(NSError *)) failure;
+//Gets the payment method info for a card bin (first six numbers)
++ (void) paymentMethodForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure;
 
-//creates a Card Token with the collected card info (post the info to our servers). You will later need this token to create a payment
-- (void) createTokenWithCardInfo:(MPCardTokenRequestData *) info onSuccess:(void (^)(MPCardTokenResponseData *)) success onFailure:(void (^)(NSError *)) failure;
+//creates a "One use Token" with the collected card info. You will later need this token to create a payment from your server
++ (void) createTokenWithCard:(MPCard *) card onSuccess:(void (^)(MPCardToken *)) success onFailure:(void (^)(NSError *)) failure;
 
 @end

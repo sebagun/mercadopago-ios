@@ -37,36 +37,43 @@
 
 #pragma mark -
 #pragma mark Requests
-- (void) getJSONFromUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
+- (NSURLSessionDataTask *) getJSONFromUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
 {
     MPRequestCompletionHandler onCompletion = [self complationHandlerWithSucess:success andFailure:failure];
     
-    [self getDataFromUrl:urlString onComplention:onCompletion];
+    return [self getDataFromUrl:urlString onComplention:onCompletion];
 }
 
-- (void) postJSON:(id)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
+- (NSURLSessionDataTask *) postJSON:(id)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
 {
     if([NSJSONSerialization isValidJSONObject:json]){
         MPRequestCompletionHandler onCompletion = [self complationHandlerWithSucess:success andFailure:failure];
         NSError *error;
         NSData *body = [NSJSONSerialization dataWithJSONObject:json options:kNilOptions error:&error];
         if (error) {
-            failure(nil,0,error);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                           ^(){
+                               failure(nil,0,error);
+                           });
         }else{
-            [self postData:body toUrl:urlString onCompletion:onCompletion];
+            return [self postData:body toUrl:urlString onCompletion:onCompletion];
         }
     }else{
         NSDictionary *info = @{@"error":[NSString stringWithFormat:@"Trying to post invalid json to url %@",urlString]};
         NSError *error = [NSError errorWithDomain:@"invalid_json" code:100 userInfo:info];
-        failure(nil,0,error);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                       ^(){
+                           failure(nil,0,error);
+                       });
     }
+    return nil;
 }
 
-- (void) postJSONString:(NSString *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
+- (NSURLSessionDataTask *) postJSONString:(NSString *)json toUrl:(NSString *)urlString onSuccess:(MPSuccessRequestHandler)success onFailure:(MPFailureRequestHandler)failure
 {
     MPRequestCompletionHandler onCompletion = [self complationHandlerWithSucess:success andFailure:failure];
     NSData *body = [json dataUsingEncoding:NSUTF8StringEncoding];
-    [self postData:body toUrl:urlString onCompletion:onCompletion];
+    return [self postData:body toUrl:urlString onCompletion:onCompletion];
 }
 
 

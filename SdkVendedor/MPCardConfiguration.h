@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MPCardConfigurationInfo : NSObject
+@interface MPCardConfiguration : NSObject
 
 @property (nonatomic,strong) NSString *binCardPattern;
 @property (nonatomic,strong) NSString *binCardExclusionPattern;
@@ -17,5 +17,11 @@
 @property (nonatomic,strong) NSString *luhnAlgorithm;
 @property (nonatomic,strong) NSString *installmentBinsPattern;
 @property (nonatomic,strong) NSArray *additionalInfoNeeded;//array of NSString
+
+/*
+ This method should not be invoked in your code. This is used by MercadoPago to retrieve
+ payment method data using a MercadoPago API response
+ */
+- (instancetype) initFromDictionary: (NSDictionary *) dict;
 
 @end

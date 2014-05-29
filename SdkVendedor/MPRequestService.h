@@ -15,8 +15,8 @@ typedef void (^MPRequestCompletionHandler)(NSData *data, NSURLResponse *response
 
 - (instancetype) initWithHeaders:(NSDictionary *) headers;
 
-- (void) getDataFromUrl:(NSString *) urlString onComplention:(MPRequestCompletionHandler) onCompletion;
+- (NSURLSessionDataTask *) getDataFromUrl:(NSString *) urlString onComplention:(MPRequestCompletionHandler) onCompletion;
 
-- (void) postData:(NSData *) data toUrl:(NSString *) urlString onCompletion:(MPRequestCompletionHandler) onCompletion;
+- (NSURLSessionDataTask *) postData:(NSData *) data toUrl:(NSString *) urlString onCompletion:(MPRequestCompletionHandler) onCompletion;
 
 @end

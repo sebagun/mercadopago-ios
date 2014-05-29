@@ -6,31 +6,33 @@
 //  Copyright (c) 2014 MercadoPago. All rights reserved.
 //
 
-#import "MPCardTokenResponseData.h"
+#import "MPCardToken.h"
 
-@implementation MPCardTokenResponseData
+@implementation MPCardToken
 
-/*
- @property (nonatomic, strong) NSString *tokenId;
- @property (nonatomic, strong) NSNumber *expirationMonth;
- @property (nonatomic, strong) NSNumber *expirationYear;
- @property (nonatomic, strong) NSString *cardId;
- @property (nonatomic, strong) NSString *truncatedCardNumber;
- @property (nonatomic, strong) NSNumber *cardNumberLenght;
- @property (nonatomic, strong) NSNumber *securityCodeLenght;
- @property (nonatomic) BOOL luhnValidation;
- @property (nonatomic, strong) NSString *status;
- 
- @property (nonatomic, strong) NSString *usedDate;
- @property (nonatomic, strong) NSString *creationDate;
- @property (nonatomic, strong) NSString *lastModifiedDate;
- @property (nonatomic, strong) NSString *dueDate;
- 
- @property (nonatomic, strong) NSString *cardholderName;
- @property (nonatomic, strong) NSString *docType;
- @property (nonatomic, strong) NSString *docSubType;
- @property (nonatomic, strong) NSString *docNumber;
- */
+- (instancetype) initFromDictionary: (NSDictionary *) dict
+{
+    if (self = [super init]) {
+        self.cardId = [dict objectForKey:@"card_id"];
+        self.luhnValidation = [(NSNumber *)[dict objectForKey:@"luhn_validation"] boolValue];
+        self.status = [dict objectForKey:@"status"];
+        self.usedDate = [dict objectForKey:@"used_date"];
+        self.cardNumberLenght = [dict objectForKey:@"card_number_length"];
+        self.tokenId = [dict objectForKey:@"id"];
+        self.creationDate = [dict objectForKey:@"creation_date"];
+        self.truncatedCardNumber = [dict objectForKey:@"trunc_card_number"];
+        self.securityCodeLenght = [dict objectForKey:@"security_code_lenth"];
+        self.expirationMonth = [dict objectForKey:@"expiration_month"];
+        self.expirationYear = [dict objectForKey:@"expiration_year"];
+        self.lastModifiedDate = [dict objectForKey:@"last_modified_date"];
+        self.cardholderName = [(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"name"];
+        self.docNumber = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"number"];
+        self.docSubType = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"subtype"];
+        self.docType = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"type"];
+        self.dueDate = [dict objectForKey:@"due_date"];
+    }
+    return self;
+}
 
 - (NSString *) description
 {

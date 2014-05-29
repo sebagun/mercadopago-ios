@@ -70,16 +70,18 @@ UIGestureRecognizer *tapper;
         MPResultViewController *resultController = (MPResultViewController *) segue.destinationViewController;
         
         //Collect the user's credit card info
-        self.card.securityCode = [[[NSNumberFormatter alloc]init]numberFromString:self.codeTextField.text];
+        self.card.securityCode = self.codeTextField.text;
         self.card.expirationMonth = [[[NSNumberFormatter alloc]init]numberFromString:self.monthTextField.text];
         self.card.expirationYear = [[[NSNumberFormatter alloc]init]numberFromString:self.yearTextField.text];
         self.card.cardholderName = self.nameTextField.text;
-        self.card.docType = self.docTypeTextField.text;
-        self.card.docNumber = self.docNumberTextField.text;
+        self.card.cardholderDocType = self.docTypeTextField.text;
+        self.card.cardholderDocNumber = self.docNumberTextField.text;
+        
+        NSLog(@"Card data collected, now gettin a token");
         
         //Now post the information to MercadoPago to create a Card Token.
-        [self.mercadopago createTokenWithCardInfo:self.card
-                                        onSuccess:^(MPCardTokenResponseData *tokenResponse){
+        [MercadoPago createTokenWithCard:self.card
+                                        onSuccess:^(MPCardToken *tokenResponse){
                                             NSLog(@"Success create token, response is %@",tokenResponse);
                                             NSString *result = [NSString stringWithFormat:@"Info posted ok! response = %@",tokenResponse];
                                             //always update UI in main queue
