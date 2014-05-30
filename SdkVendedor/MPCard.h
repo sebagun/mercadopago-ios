@@ -22,9 +22,9 @@
  Cardholder info
  */
 @property (nonatomic, strong) NSString *cardholderName;
-@property (nonatomic, strong) NSString *cardholderDocType;
-@property (nonatomic, strong) NSString *cardholderDocSubType;
-@property (nonatomic, strong) NSString *cardholderDocNumber;
+@property (nonatomic, strong) NSString *cardholderIDType;
+@property (nonatomic, strong) NSString *cardholderIDSubType;
+@property (nonatomic, strong) NSString *cardholderIDNumber;
 
 /*
  Key-value validation, as described here:
@@ -40,6 +40,7 @@
  */
 - (BOOL)validateCardReturningError:(NSError **)outError;
 
+- (NSString *) cardBin;
 
 /*
  Used by [MercadoPago createTokenWithCard:]

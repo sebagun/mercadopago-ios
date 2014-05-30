@@ -37,9 +37,9 @@
  Cardholder data
  */
 @property (nonatomic, strong) NSString *cardholderName;
-@property (nonatomic, strong) NSString *docType;
-@property (nonatomic, strong) NSString *docSubType;
-@property (nonatomic, strong) NSString *docNumber;
+@property (nonatomic, strong) NSString *cardholderIDType;
+@property (nonatomic, strong) NSString *cardholderIDSubType;
+@property (nonatomic, strong) NSString *cardholderIDNumber;
 
 /*
  This method should not be invoked in your code. This is used by MercadoPago to

@@ -26,9 +26,9 @@
         self.expirationYear = [dict objectForKey:@"expiration_year"];
         self.lastModifiedDate = [dict objectForKey:@"last_modified_date"];
         self.cardholderName = [(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"name"];
-        self.docNumber = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"number"];
-        self.docSubType = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"subtype"];
-        self.docType = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"document"] objectForKey:@"type"];
+        self.cardholderIDNumber = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"identification"] objectForKey:@"number"];
+        self.cardholderIDSubType = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"identification"] objectForKey:@"subtype"];
+        self.cardholderIDType = [(NSDictionary *)[(NSDictionary *)[dict objectForKey:@"cardholder"] objectForKey:@"identification"] objectForKey:@"type"];
         self.dueDate = [dict objectForKey:@"due_date"];
     }
     return self;
@@ -63,12 +63,12 @@
     [desc addObject:[NSString stringWithFormat:@"%@",self.dueDate]];
     [desc addObject:@", cardholderName: "];
     [desc addObject:[NSString stringWithFormat:@"%@",self.cardholderName]];
-    [desc addObject:@", docType: "];
-    [desc addObject:[NSString stringWithFormat:@"%@",self.docType]];
-    [desc addObject:@", docSubType: "];
-    [desc addObject:[NSString stringWithFormat:@"%@",self.docSubType]];
-    [desc addObject:@", docNumber: "];
-    [desc addObject:[NSString stringWithFormat:@"%@",self.docNumber]];
+    [desc addObject:@", cardholderIDType: "];
+    [desc addObject:[NSString stringWithFormat:@"%@",self.cardholderIDType]];
+    [desc addObject:@", cardholderIDSubType: "];
+    [desc addObject:[NSString stringWithFormat:@"%@",self.cardholderIDSubType]];
+    [desc addObject:@", cardholderIDNumber: "];
+    [desc addObject:[NSString stringWithFormat:@"%@",self.cardholderIDNumber]];
     [desc addObject:@" }"];
     
     return [desc componentsJoinedByString:@""];

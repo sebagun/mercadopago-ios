@@ -63,6 +63,8 @@ UIGestureRecognizer *tapper;
     [self.view endEditing:YES];
 }
 
+//TODO: implement field validators
+
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -74,26 +76,24 @@ UIGestureRecognizer *tapper;
         self.card.expirationMonth = [[[NSNumberFormatter alloc]init]numberFromString:self.monthTextField.text];
         self.card.expirationYear = [[[NSNumberFormatter alloc]init]numberFromString:self.yearTextField.text];
         self.card.cardholderName = self.nameTextField.text;
-        self.card.cardholderDocType = self.docTypeTextField.text;
-        self.card.cardholderDocNumber = self.docNumberTextField.text;
-        
-        NSLog(@"Card data collected, now gettin a token");
+        self.card.cardholderIDType = self.docTypeTextField.text;
+        self.card.cardholderIDNumber = self.docNumberTextField.text;
         
         //Now post the information to MercadoPago to create a Card Token.
         [MercadoPago createTokenWithCard:self.card
                                         onSuccess:^(MPCardToken *tokenResponse){
-                                            NSLog(@"Success create token, response is %@",tokenResponse);
+                                            NSLog(@"Success creating token, response is %@",tokenResponse);
                                             NSString *result = [NSString stringWithFormat:@"Info posted ok! response = %@",tokenResponse];
                                             //always update UI in main queue
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 [resultController setResultInfo:result];
                                             });
                                             //Post token to your server so you can create the payment from there
-                                            //If the user selected shares, you will need that info in your server
+                                            //If the user selected installments, you will need that info in your server
                                             //TODO: YOUR CODE HERE...
                                         }
                                         onFailure:^(NSError *error){
-                                            NSLog(@"Error create token: %@",error);
+                                            NSLog(@"Error creating token: %@",error);
                                             NSString *result = [NSString stringWithFormat:@"Error! %@",error];
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 [resultController setResultInfo:result];

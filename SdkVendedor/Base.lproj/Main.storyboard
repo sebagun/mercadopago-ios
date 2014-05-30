@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller - Checkout-->
+        <!--Main View Controller - Card Number-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MPMainViewController" sceneMemberID="viewController">
@@ -22,14 +22,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading possible installments ..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0UK-Qu-QPM">
-                                <rect key="frame" x="20" y="236" width="247" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tuh-I6-IfE">
-                                <rect key="frame" x="74" y="72" width="224" height="27"/>
+                                <rect key="frame" x="74" y="104" width="224" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Apple Magic Mouse">
@@ -42,11 +36,11 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgd-8Y-AUm">
-                                <rect key="frame" x="74" y="107" width="224" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNK-48-up7">
+                                <rect key="frame" x="74" y="72" width="224" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Total: $100">
+                                    <fragment content="You are buying:">
                                         <attributes>
                                             <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <font key="NSFont" size="17" name="HelveticaNeue"/>
@@ -62,17 +56,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                 <connections>
-                                    <action selector="creditCardNumberTyped:" destination="vXZ-lx-hvc" eventType="editingChanged" id="57Z-da-F4N"/>
+                                    <action selector="creditCardNumberTyped:" destination="vXZ-lx-hvc" eventType="editingChanged" id="JX7-Xv-FE8"/>
                                 </connections>
                             </textField>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iH1-H1-ApF">
-                                <rect key="frame" x="18" y="236" width="280" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="3bF-po-8up"/>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Lxf-ee-lfj"/>
-                                </connections>
-                            </pickerView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="magicmouse" translatesAutoresizingMaskIntoConstraints="NO" id="NAp-gB-sNk">
                                 <rect key="frame" x="20" y="72" width="46" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -80,24 +66,82 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Checkout" id="Uux-SC-ATQ">
+                    <navigationItem key="navigationItem" title="Card Number" id="Uux-SC-ATQ">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="ooK-iv-Lr5">
                             <connections>
                                 <action selector="onNextTapped:" destination="vXZ-lx-hvc" id="F0b-h7-Ju6"/>
-                                <segue destination="pDB-oh-OyJ" kind="push" identifier="ask extra data" id="sRq-Pq-Yss"/>
+                                <segue destination="qcS-92-Tb5" kind="push" identifier="go to installments" id="I5t-Zf-tcf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="installmentsLabel" destination="0UK-Qu-QPM" id="Yqf-37-CPW"/>
-                        <outlet property="installmentsPicker" destination="iH1-H1-ApF" id="Tx1-Qd-7i6"/>
+                        <outlet property="nextButton" destination="ooK-iv-Lr5" id="War-QH-zwz"/>
                         <outlet property="numberTextField" destination="sF6-BN-Yyi" id="QNL-5e-qZV"/>
-                        <outlet property="totalAmountLabel" destination="Kgd-8Y-AUm" id="aBr-oA-JeF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="895" y="-8"/>
+            <point key="canvasLocation" x="675" y="-458"/>
+        </scene>
+        <!--Installments View Controller - Installments-->
+        <scene sceneID="Pxa-e6-Mhx">
+            <objects>
+                <viewController id="qcS-92-Tb5" customClass="MPInstallmentsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mu2-Hy-TsX"/>
+                        <viewControllerLayoutGuide type="bottom" id="UW8-ay-yb5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="J82-0X-x64">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eWt-j6-Xuz">
+                                <rect key="frame" x="20" y="105" width="280" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="qcS-92-Tb5" id="9H0-iT-Y62"/>
+                                    <outlet property="delegate" destination="qcS-92-Tb5" id="vbw-Tp-N91"/>
+                                </connections>
+                            </pickerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKd-yu-dal">
+                                <rect key="frame" x="20" y="70" width="224" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Total: $100">
+                                        <attributes>
+                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="**this step is optional" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTv-0S-LI9">
+                                <rect key="frame" x="20" y="527" width="162" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Installments" id="yjt-Ys-5M0">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="q78-HC-eQF">
+                            <connections>
+                                <segue destination="pDB-oh-OyJ" kind="push" identifier="ask extra data" id="sbR-gC-CVT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="installmentsPicker" destination="eWt-j6-Xuz" id="Kex-XW-x9I"/>
+                        <outlet property="totalAmountLabel" destination="KKd-yu-dal" id="o18-ag-7jZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qr4-OF-Uoe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1099" y="-458"/>
         </scene>
         <!--Result View Controller - Result-->
         <scene sceneID="0Av-tk-LM4">
@@ -128,9 +172,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWO-xr-zwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1806" y="-14"/>
+            <point key="canvasLocation" x="1976" y="-464"/>
         </scene>
-        <!--Extra Data View Controller - Checkout-->
+        <!--Extra Data View Controller - Extra info-->
         <scene sceneID="yHf-vm-Jkh">
             <objects>
                 <viewController id="pDB-oh-OyJ" customClass="MPExtraDataViewController" sceneMemberID="viewController">
@@ -229,7 +273,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Checkout" id="08O-zl-Zr3">
+                    <navigationItem key="navigationItem" title="Extra info" id="08O-zl-Zr3">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="ikE-Jz-3me">
                             <connections>
                                 <segue destination="bRm-ZT-7u5" kind="push" identifier="Post Card Info" id="N9e-qY-ogP"/>
@@ -247,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R8B-Xu-p8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1361" y="-8"/>
+            <point key="canvasLocation" x="1531" y="-458"/>
         </scene>
         <!--Navigation Controller - Simple-->
         <scene sceneID="lTS-xG-UUM">
@@ -266,7 +310,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ty9-Bc-5tw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="-8"/>
+            <point key="canvasLocation" x="170" y="-458"/>
         </scene>
     </scenes>
     <resources>

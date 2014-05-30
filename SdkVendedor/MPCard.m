@@ -24,15 +24,9 @@
         return [[self class] handleValidationErrorForParameter:@"cardNumber" error:outError];
     }
     
-    NSError *regexError = nil;
     NSString *ioValueString = (NSString *) *ioValue;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[\\s+|-]"
-                                                                           options:NSRegularExpressionCaseInsensitive
-                                                                             error:&regexError];
     
-    NSString *rawNumber = [regex stringByReplacingMatchesInString:ioValueString options:0 range:NSMakeRange(0, [ioValueString length]) withTemplate:@""];
-    
-    if (rawNumber == nil || rawNumber.length < 10 || rawNumber.length > 19) {
+    if (![MPUtils isNumericString:ioValueString] || ioValueString.length < 10 || ioValueString.length > 19) {
         return [[self class] handleValidationErrorForParameter:@"cardNumber" error:outError];
     }
     return YES;
@@ -123,14 +117,21 @@
     [cardholder setObject:(self.cardholderName?self.cardholderName:[NSNull null]) forKey:@"name"];
     
     NSMutableDictionary *document = [NSMutableDictionary dictionary];
-    [document setObject:(self.cardholderDocType?self.cardholderDocType:[NSNull null]) forKey:@"type"];
-    [document setObject:(self.cardholderDocNumber?self.cardholderDocNumber:[NSNull null]) forKey:@"number"];
-    [document setObject:(self.cardholderDocSubType?self.cardholderDocSubType:[NSNull null]) forKey:@"subtype"];
+    [document setObject:(self.cardholderIDType?self.cardholderIDType:[NSNull null]) forKey:@"type"];
+    [document setObject:(self.cardholderIDNumber?self.cardholderIDNumber:[NSNull null]) forKey:@"number"];
+    [document setObject:(self.cardholderIDSubType?self.cardholderIDSubType:[NSNull null]) forKey:@"subtype"];
     
-    [cardholder setObject:document forKey:@"document"];
+    [cardholder setObject:document forKey:@"identification"];
     [json setObject:cardholder forKey:@"cardholder"];
     
     return json;
+}
+- (NSString *) cardBin
+{
+    if (self.cardNumber && [self.cardNumber length] > 5) {
+        return [self.cardNumber substringToIndex:6];
+    }
+    return nil;
 }
 
 #pragma mark -

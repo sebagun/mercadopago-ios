@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF3407F81934DD3500243083 /* MPError.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3407F71934DD3500243083 /* MPError.m */; };
+		CF3407FD1938C70500243083 /* MPInstallmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3407FC1938C70500243083 /* MPInstallmentsViewController.m */; };
 		CF6A02031919338100A8ACB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6A02021919338100A8ACB5 /* Foundation.framework */; };
 		CF6A02051919338100A8ACB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6A02041919338100A8ACB5 /* CoreGraphics.framework */; };
 		CF6A02071919338100A8ACB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6A02061919338100A8ACB5 /* UIKit.framework */; };
@@ -53,6 +54,8 @@
 /* Begin PBXFileReference section */
 		CF3407F61934DD3500243083 /* MPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPError.h; sourceTree = "<group>"; };
 		CF3407F71934DD3500243083 /* MPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPError.m; sourceTree = "<group>"; };
+		CF3407FB1938C70500243083 /* MPInstallmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPInstallmentsViewController.h; sourceTree = "<group>"; };
+		CF3407FC1938C70500243083 /* MPInstallmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPInstallmentsViewController.m; sourceTree = "<group>"; };
 		CF6A01FF1919338100A8ACB5 /* SdkVendedor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SdkVendedor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6A02021919338100A8ACB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CF6A02041919338100A8ACB5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +141,8 @@
 				CF6A02121919338100A8ACB5 /* MPAppDelegate.m */,
 				CF6A02171919338100A8ACB5 /* MPMainViewController.h */,
 				CF6A02181919338100A8ACB5 /* MPMainViewController.m */,
+				CF3407FB1938C70500243083 /* MPInstallmentsViewController.h */,
+				CF3407FC1938C70500243083 /* MPInstallmentsViewController.m */,
 				CFC617FA1929158C00CCB6F3 /* MPExtraDataViewController.h */,
 				CFC617FB1929158C00CCB6F3 /* MPExtraDataViewController.m */,
 				CF6A0245191BFD2A00A8ACB5 /* MPResultViewController.h */,
@@ -387,6 +392,7 @@
 				CF6A0241191AB8E100A8ACB5 /* MercadoPago.m in Sources */,
 				CF6A0244191BC0E100A8ACB5 /* MPCard.m in Sources */,
 				CF6A0247191BFD2A00A8ACB5 /* MPResultViewController.m in Sources */,
+				CF3407FD1938C70500243083 /* MPInstallmentsViewController.m in Sources */,
 				CF6A025A1921414500A8ACB5 /* MPCardToken.m in Sources */,
 				CF6A02131919338100A8ACB5 /* MPAppDelegate.m in Sources */,
 			);

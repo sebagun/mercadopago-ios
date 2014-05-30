@@ -66,11 +66,16 @@
                            failure(validationError);
                        }
         );
+        return;
     }
     
     //Handle JSON success response from API
     MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
-        NSDictionary *json = [(NSArray *)jsonArr objectAtIndex:0]; //ugly!!!! but it's the only way. Some mastercard issuers use the same bin in ARG, so the API will return more than one payment_method in those cases
+        /*
+         Ugly, I know!!!! but it's the only way. Some Mastercard issuers in Argentina use the same bin,
+         so the API will return more than one payment_method in those cases. This could be better in future.
+        */
+        NSDictionary *json = [(NSArray *)jsonArr objectAtIndex:0];
         
         MPPaymentMethod *p = [[MPPaymentMethod alloc]initFromDictionary:json];
         success(p);
