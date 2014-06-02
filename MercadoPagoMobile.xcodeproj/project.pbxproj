@@ -147,6 +147,8 @@
 				CFC617FB1929158C00CCB6F3 /* MPExtraDataViewController.m */,
 				CF6A0245191BFD2A00A8ACB5 /* MPResultViewController.h */,
 				CF6A0246191BFD2A00A8ACB5 /* MPResultViewController.m */,
+				CF6A021A1919338100A8ACB5 /* Images.xcassets */,
+				CF6A02091919338100A8ACB5 /* Supporting Files */,
 			);
 			path = example;
 			sourceTree = "<group>";
@@ -206,8 +208,6 @@
 			children = (
 				CF3407F91936272E00243083 /* example */,
 				CF6A023A1919393200A8ACB5 /* sdk */,
-				CF6A021A1919338100A8ACB5 /* Images.xcassets */,
-				CF6A02091919338100A8ACB5 /* Supporting Files */,
 			);
 			path = MercadoPagoMobile;
 			sourceTree = "<group>";
@@ -216,11 +216,11 @@
 			isa = PBXGroup;
 			children = (
 				CF6A020A1919338100A8ACB5 /* MercadoPagoMobile-Info.plist */,
+				CF6A02101919338100A8ACB5 /* MercadoPagoMobile-Prefix.pch */,
 				CF6A020B1919338100A8ACB5 /* InfoPlist.strings */,
 				CF6A020E1919338100A8ACB5 /* main.m */,
-				CF6A02101919338100A8ACB5 /* MercadoPagoMobile-Prefix.pch */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		CF6A02271919338200A8ACB5 /* MercadoPagoMobileTests */ = {
@@ -525,8 +525,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MercadoPagoMobile/MercadoPagoMobile-Prefix.pch";
-				INFOPLIST_FILE = "MercadoPagoMobile/MercadoPagoMobile-Info.plist";
+				GCC_PREFIX_HEADER = "MercadoPagoMobile/example/Supporting Files/MercadoPagoMobile-Prefix.pch";
+				INFOPLIST_FILE = "MercadoPagoMobile/example/Supporting Files/MercadoPagoMobile-Info.plist";
 				PRODUCT_NAME = MercadoPagoMobile;
 				WRAPPER_EXTENSION = app;
 			};
@@ -542,8 +542,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MercadoPagoMobile/MercadoPagoMobile-Prefix.pch";
-				INFOPLIST_FILE = "MercadoPagoMobile/MercadoPagoMobile-Info.plist";
+				GCC_PREFIX_HEADER = "MercadoPagoMobile/example/Supporting Files/MercadoPagoMobile-Prefix.pch";
+				INFOPLIST_FILE = "MercadoPagoMobile/example/Supporting Files/MercadoPagoMobile-Info.plist";
 				PRODUCT_NAME = MercadoPagoMobile;
 				WRAPPER_EXTENSION = app;
 			};
