@@ -56,23 +56,23 @@
 		CF3407F71934DD3500243083 /* MPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPError.m; sourceTree = "<group>"; };
 		CF3407FB1938C70500243083 /* MPInstallmentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPInstallmentsViewController.h; sourceTree = "<group>"; };
 		CF3407FC1938C70500243083 /* MPInstallmentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPInstallmentsViewController.m; sourceTree = "<group>"; };
-		CF6A01FF1919338100A8ACB5 /* SdkVendedor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SdkVendedor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF6A01FF1919338100A8ACB5 /* MercadoPagoMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MercadoPagoMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6A02021919338100A8ACB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CF6A02041919338100A8ACB5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CF6A02061919338100A8ACB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		CF6A020A1919338100A8ACB5 /* SdkVendedor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SdkVendedor-Info.plist"; sourceTree = "<group>"; };
+		CF6A020A1919338100A8ACB5 /* MercadoPagoMobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MercadoPagoMobile-Info.plist"; sourceTree = "<group>"; };
 		CF6A020C1919338100A8ACB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CF6A020E1919338100A8ACB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CF6A02101919338100A8ACB5 /* SdkVendedor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SdkVendedor-Prefix.pch"; sourceTree = "<group>"; };
+		CF6A02101919338100A8ACB5 /* MercadoPagoMobile-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MercadoPagoMobile-Prefix.pch"; sourceTree = "<group>"; };
 		CF6A02111919338100A8ACB5 /* MPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPAppDelegate.h; sourceTree = "<group>"; };
 		CF6A02121919338100A8ACB5 /* MPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPAppDelegate.m; sourceTree = "<group>"; };
 		CF6A02151919338100A8ACB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF6A02171919338100A8ACB5 /* MPMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPMainViewController.h; sourceTree = "<group>"; };
 		CF6A02181919338100A8ACB5 /* MPMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPMainViewController.m; sourceTree = "<group>"; };
 		CF6A021A1919338100A8ACB5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CF6A02201919338100A8ACB5 /* SdkVendedorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SdkVendedorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF6A02201919338100A8ACB5 /* MercadoPagoMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MercadoPagoMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6A02211919338100A8ACB5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		CF6A02291919338200A8ACB5 /* SdkVendedorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SdkVendedorTests-Info.plist"; sourceTree = "<group>"; };
+		CF6A02291919338200A8ACB5 /* MercadoPagoMobileTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MercadoPagoMobileTests-Info.plist"; sourceTree = "<group>"; };
 		CF6A022B1919338200A8ACB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CF6A022D1919338200A8ACB5 /* SdkVendedorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SdkVendedorTests.m; sourceTree = "<group>"; };
 		CF6A0237191933C900A8ACB5 /* MPRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPRequestService.h; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 		CF6A01F61919338100A8ACB5 = {
 			isa = PBXGroup;
 			children = (
-				CF6A02081919338100A8ACB5 /* SdkVendedor */,
-				CF6A02271919338200A8ACB5 /* SdkVendedorTests */,
+				CF6A02081919338100A8ACB5 /* MercadoPagoMobile */,
+				CF6A02271919338200A8ACB5 /* MercadoPagoMobileTests */,
 				CF6A02011919338100A8ACB5 /* Frameworks */,
 				CF6A02001919338100A8ACB5 /* Products */,
 			);
@@ -181,8 +181,8 @@
 		CF6A02001919338100A8ACB5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CF6A01FF1919338100A8ACB5 /* SdkVendedor.app */,
-				CF6A02201919338100A8ACB5 /* SdkVendedorTests.xctest */,
+				CF6A01FF1919338100A8ACB5 /* MercadoPagoMobile.app */,
+				CF6A02201919338100A8ACB5 /* MercadoPagoMobileTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CF6A02081919338100A8ACB5 /* SdkVendedor */ = {
+		CF6A02081919338100A8ACB5 /* MercadoPagoMobile */ = {
 			isa = PBXGroup;
 			children = (
 				CF3407F91936272E00243083 /* example */,
@@ -209,33 +209,35 @@
 				CF6A021A1919338100A8ACB5 /* Images.xcassets */,
 				CF6A02091919338100A8ACB5 /* Supporting Files */,
 			);
+			name = MercadoPagoMobile;
 			path = SdkVendedor;
 			sourceTree = "<group>";
 		};
 		CF6A02091919338100A8ACB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CF6A020A1919338100A8ACB5 /* SdkVendedor-Info.plist */,
+				CF6A020A1919338100A8ACB5 /* MercadoPagoMobile-Info.plist */,
 				CF6A020B1919338100A8ACB5 /* InfoPlist.strings */,
 				CF6A020E1919338100A8ACB5 /* main.m */,
-				CF6A02101919338100A8ACB5 /* SdkVendedor-Prefix.pch */,
+				CF6A02101919338100A8ACB5 /* MercadoPagoMobile-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CF6A02271919338200A8ACB5 /* SdkVendedorTests */ = {
+		CF6A02271919338200A8ACB5 /* MercadoPagoMobileTests */ = {
 			isa = PBXGroup;
 			children = (
 				CF6A022D1919338200A8ACB5 /* SdkVendedorTests.m */,
 				CF6A02281919338200A8ACB5 /* Supporting Files */,
 			);
+			name = MercadoPagoMobileTests;
 			path = SdkVendedorTests;
 			sourceTree = "<group>";
 		};
 		CF6A02281919338200A8ACB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CF6A02291919338200A8ACB5 /* SdkVendedorTests-Info.plist */,
+				CF6A02291919338200A8ACB5 /* MercadoPagoMobileTests-Info.plist */,
 				CF6A022A1919338200A8ACB5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -282,9 +284,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CF6A01FE1919338100A8ACB5 /* SdkVendedor */ = {
+		CF6A01FE1919338100A8ACB5 /* MercadoPagoMobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CF6A02311919338200A8ACB5 /* Build configuration list for PBXNativeTarget "SdkVendedor" */;
+			buildConfigurationList = CF6A02311919338200A8ACB5 /* Build configuration list for PBXNativeTarget "MercadoPagoMobile" */;
 			buildPhases = (
 				CF6A01FB1919338100A8ACB5 /* Sources */,
 				CF6A01FC1919338100A8ACB5 /* Frameworks */,
@@ -294,14 +296,14 @@
 			);
 			dependencies = (
 			);
-			name = SdkVendedor;
+			name = MercadoPagoMobile;
 			productName = SdkVendedor;
-			productReference = CF6A01FF1919338100A8ACB5 /* SdkVendedor.app */;
+			productReference = CF6A01FF1919338100A8ACB5 /* MercadoPagoMobile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CF6A021F1919338100A8ACB5 /* SdkVendedorTests */ = {
+		CF6A021F1919338100A8ACB5 /* MercadoPagoMobileTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CF6A02341919338200A8ACB5 /* Build configuration list for PBXNativeTarget "SdkVendedorTests" */;
+			buildConfigurationList = CF6A02341919338200A8ACB5 /* Build configuration list for PBXNativeTarget "MercadoPagoMobileTests" */;
 			buildPhases = (
 				CF6A021C1919338100A8ACB5 /* Sources */,
 				CF6A021D1919338100A8ACB5 /* Frameworks */,
@@ -312,9 +314,9 @@
 			dependencies = (
 				CF6A02261919338200A8ACB5 /* PBXTargetDependency */,
 			);
-			name = SdkVendedorTests;
+			name = MercadoPagoMobileTests;
 			productName = SdkVendedorTests;
-			productReference = CF6A02201919338100A8ACB5 /* SdkVendedorTests.xctest */;
+			productReference = CF6A02201919338100A8ACB5 /* MercadoPagoMobileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -332,7 +334,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CF6A01FA1919338100A8ACB5 /* Build configuration list for PBXProject "SdkVendedor" */;
+			buildConfigurationList = CF6A01FA1919338100A8ACB5 /* Build configuration list for PBXProject "MercadoPagoMobile" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -345,8 +347,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CF6A01FE1919338100A8ACB5 /* SdkVendedor */,
-				CF6A021F1919338100A8ACB5 /* SdkVendedorTests */,
+				CF6A01FE1919338100A8ACB5 /* MercadoPagoMobile */,
+				CF6A021F1919338100A8ACB5 /* MercadoPagoMobileTests */,
 			);
 		};
 /* End PBXProject section */
@@ -411,7 +413,7 @@
 /* Begin PBXTargetDependency section */
 		CF6A02261919338200A8ACB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CF6A01FE1919338100A8ACB5 /* SdkVendedor */;
+			target = CF6A01FE1919338100A8ACB5 /* MercadoPagoMobile */;
 			targetProxy = CF6A02251919338200A8ACB5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -524,9 +526,9 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SdkVendedor/SdkVendedor-Prefix.pch";
-				INFOPLIST_FILE = "SdkVendedor/SdkVendedor-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SdkVendedor/MercadoPagoMobile-Prefix.pch";
+				INFOPLIST_FILE = "SdkVendedor/MercadoPagoMobile-Info.plist";
+				PRODUCT_NAME = MercadoPagoMobile;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -541,9 +543,9 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SdkVendedor/SdkVendedor-Prefix.pch";
-				INFOPLIST_FILE = "SdkVendedor/SdkVendedor-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SdkVendedor/MercadoPagoMobile-Prefix.pch";
+				INFOPLIST_FILE = "SdkVendedor/MercadoPagoMobile-Info.plist";
+				PRODUCT_NAME = MercadoPagoMobile;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -563,8 +565,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "SdkVendedorTests/SdkVendedorTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "SdkVendedorTests/MercadoPagoMobileTests-Info.plist";
+				PRODUCT_NAME = MercadoPagoMobileTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -581,8 +583,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SdkVendedor/SdkVendedor-Prefix.pch";
-				INFOPLIST_FILE = "SdkVendedorTests/SdkVendedorTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "SdkVendedorTests/MercadoPagoMobileTests-Info.plist";
+				PRODUCT_NAME = MercadoPagoMobileTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -591,7 +593,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CF6A01FA1919338100A8ACB5 /* Build configuration list for PBXProject "SdkVendedor" */ = {
+		CF6A01FA1919338100A8ACB5 /* Build configuration list for PBXProject "MercadoPagoMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF6A022F1919338200A8ACB5 /* Debug */,
@@ -600,7 +602,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CF6A02311919338200A8ACB5 /* Build configuration list for PBXNativeTarget "SdkVendedor" */ = {
+		CF6A02311919338200A8ACB5 /* Build configuration list for PBXNativeTarget "MercadoPagoMobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF6A02321919338200A8ACB5 /* Debug */,
@@ -609,7 +611,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CF6A02341919338200A8ACB5 /* Build configuration list for PBXNativeTarget "SdkVendedorTests" */ = {
+		CF6A02341919338200A8ACB5 /* Build configuration list for PBXNativeTarget "MercadoPagoMobileTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF6A02351919338200A8ACB5 /* Debug */,
