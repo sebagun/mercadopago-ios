@@ -22,7 +22,7 @@
 		CF6A02231919338100A8ACB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6A02021919338100A8ACB5 /* Foundation.framework */; };
 		CF6A02241919338200A8ACB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6A02061919338100A8ACB5 /* UIKit.framework */; };
 		CF6A022C1919338200A8ACB5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF6A022A1919338200A8ACB5 /* InfoPlist.strings */; };
-		CF6A022E1919338200A8ACB5 /* SdkVendedorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A022D1919338200A8ACB5 /* SdkVendedorTests.m */; };
+		CF6A022E1919338200A8ACB5 /* MercadoPagoMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A022D1919338200A8ACB5 /* MercadoPagoMobileTests.m */; };
 		CF6A0239191933C900A8ACB5 /* MPRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0238191933C900A8ACB5 /* MPRequestService.m */; };
 		CF6A023D191A659000A8ACB5 /* MPJSONRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A023C191A659000A8ACB5 /* MPJSONRestClient.m */; };
 		CF6A0241191AB8E100A8ACB5 /* MercadoPago.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A0240191AB8E100A8ACB5 /* MercadoPago.m */; };
@@ -74,7 +74,7 @@
 		CF6A02211919338100A8ACB5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CF6A02291919338200A8ACB5 /* MercadoPagoMobileTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MercadoPagoMobileTests-Info.plist"; sourceTree = "<group>"; };
 		CF6A022B1919338200A8ACB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CF6A022D1919338200A8ACB5 /* SdkVendedorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SdkVendedorTests.m; sourceTree = "<group>"; };
+		CF6A022D1919338200A8ACB5 /* MercadoPagoMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MercadoPagoMobileTests.m; sourceTree = "<group>"; };
 		CF6A0237191933C900A8ACB5 /* MPRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPRequestService.h; sourceTree = "<group>"; };
 		CF6A0238191933C900A8ACB5 /* MPRequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPRequestService.m; sourceTree = "<group>"; };
 		CF6A023B191A659000A8ACB5 /* MPJSONRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPJSONRestClient.h; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				CF6A0245191BFD2A00A8ACB5 /* MPResultViewController.h */,
 				CF6A0246191BFD2A00A8ACB5 /* MPResultViewController.m */,
 			);
-			name = example;
+			path = example;
 			sourceTree = "<group>";
 		};
 		CF3407FA19378EAB00243083 /* payment method */ = {
@@ -209,8 +209,7 @@
 				CF6A021A1919338100A8ACB5 /* Images.xcassets */,
 				CF6A02091919338100A8ACB5 /* Supporting Files */,
 			);
-			name = MercadoPagoMobile;
-			path = SdkVendedor;
+			path = MercadoPagoMobile;
 			sourceTree = "<group>";
 		};
 		CF6A02091919338100A8ACB5 /* Supporting Files */ = {
@@ -227,11 +226,11 @@
 		CF6A02271919338200A8ACB5 /* MercadoPagoMobileTests */ = {
 			isa = PBXGroup;
 			children = (
-				CF6A022D1919338200A8ACB5 /* SdkVendedorTests.m */,
+				CF6A022D1919338200A8ACB5 /* MercadoPagoMobileTests.m */,
 				CF6A02281919338200A8ACB5 /* Supporting Files */,
 			);
 			name = MercadoPagoMobileTests;
-			path = SdkVendedorTests;
+			path = MercadoPagoTests;
 			sourceTree = "<group>";
 		};
 		CF6A02281919338200A8ACB5 /* Supporting Files */ = {
@@ -255,7 +254,7 @@
 				CF6A0248192118C900A8ACB5 /* dto */,
 				CF6A023E191A6E2200A8ACB5 /* http client */,
 			);
-			name = sdk;
+			path = sdk;
 			sourceTree = "<group>";
 		};
 		CF6A023E191A6E2200A8ACB5 /* http client */ = {
@@ -266,7 +265,7 @@
 				CF6A0237191933C900A8ACB5 /* MPRequestService.h */,
 				CF6A0238191933C900A8ACB5 /* MPRequestService.m */,
 			);
-			name = "http client";
+			path = "http client";
 			sourceTree = "<group>";
 		};
 		CF6A0248192118C900A8ACB5 /* dto */ = {
@@ -278,7 +277,7 @@
 				CF6A02591921414500A8ACB5 /* MPCardToken.m */,
 				CF3407FA19378EAB00243083 /* payment method */,
 			);
-			name = dto;
+			path = dto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,7 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF6A022E1919338200A8ACB5 /* SdkVendedorTests.m in Sources */,
+				CF6A022E1919338200A8ACB5 /* MercadoPagoMobileTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,8 +525,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SdkVendedor/MercadoPagoMobile-Prefix.pch";
-				INFOPLIST_FILE = "SdkVendedor/MercadoPagoMobile-Info.plist";
+				GCC_PREFIX_HEADER = "MercadoPagoMobile/MercadoPagoMobile-Prefix.pch";
+				INFOPLIST_FILE = "MercadoPagoMobile/MercadoPagoMobile-Info.plist";
 				PRODUCT_NAME = MercadoPagoMobile;
 				WRAPPER_EXTENSION = app;
 			};
@@ -543,8 +542,8 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SdkVendedor/MercadoPagoMobile-Prefix.pch";
-				INFOPLIST_FILE = "SdkVendedor/MercadoPagoMobile-Info.plist";
+				GCC_PREFIX_HEADER = "MercadoPagoMobile/MercadoPagoMobile-Prefix.pch";
+				INFOPLIST_FILE = "MercadoPagoMobile/MercadoPagoMobile-Info.plist";
 				PRODUCT_NAME = MercadoPagoMobile;
 				WRAPPER_EXTENSION = app;
 			};

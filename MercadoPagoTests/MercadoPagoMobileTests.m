@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface SdkVendedorTests : XCTestCase
+@interface MercadoPagoMobileTests : XCTestCase
 
 @end
 
-@implementation SdkVendedorTests
+@implementation MercadoPagoMobileTests
 
 - (void)setUp
 {

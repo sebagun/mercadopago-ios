@@ -8,9 +8,6 @@
 
 #import "MercadoPago.h"
 #import "MPJSONRestClient.h"
-#import "MPPayerCost.h"
-#import "MPExceptionsByCardIssuer.h"
-#import "MPCardConfiguration.h"
 #import "MPUtils.h"
 #import "MPError.h"
 

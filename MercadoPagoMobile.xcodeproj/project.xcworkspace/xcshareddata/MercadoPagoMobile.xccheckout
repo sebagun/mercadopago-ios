@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D3B9D2D1-81C7-4080-8666-F9600FD86E28</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MercadoPagoMobile</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BA7F4038-C18B-4EEB-9203-C65DC6A03963</key>
+		<string>ssh://github.com/mercadolibre/mpmobile-ios_sdk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MercadoPagoMobile.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BA7F4038-C18B-4EEB-9203-C65DC6A03963</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/mercadolibre/mpmobile-ios_sdk.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BA7F4038-C18B-4EEB-9203-C65DC6A03963</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BA7F4038-C18B-4EEB-9203-C65DC6A03963</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mpmobile-ios_sdk</string>
+		</dict>
+	</array>
+</dict>
+</plist>
