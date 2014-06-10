@@ -216,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3407F91936272E00243083 /* example */,
-				CF6A023A1919393200A8ACB5 /* sdk */,
+				CF6A023A1919393200A8ACB5 /* MercadoPagoMobileSDK */,
 			);
 			path = MercadoPagoMobile;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CF6A023A1919393200A8ACB5 /* sdk */ = {
+		CF6A023A1919393200A8ACB5 /* MercadoPagoMobileSDK */ = {
 			isa = PBXGroup;
 			children = (
 				CF6A023F191AB8E100A8ACB5 /* MercadoPago.h */,
@@ -264,7 +264,7 @@
 				CF6A023E191A6E2200A8ACB5 /* http client */,
 				CFDB88A119463B6600693CF5 /* device */,
 			);
-			path = sdk;
+			path = MercadoPagoMobileSDK;
 			sourceTree = "<group>";
 		};
 		CF6A023E191A6E2200A8ACB5 /* http client */ = {
