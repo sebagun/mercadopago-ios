@@ -2,6 +2,8 @@
 
 The MercadoPago iOS SDK make it easy to collect your users' credit card details inside your iOS app. By creating [tokens](https://coming-soon), MercadoPago handles the bulk of PCI compliance by preventing sensitive card data from hitting your server.
 
+It's builded for iOS 7 or sooner.
+
 ## Installation
 
 There are two ways to add MercadoPago to your project:
