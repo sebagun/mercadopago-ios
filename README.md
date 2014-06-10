@@ -28,11 +28,11 @@ First, you need a publishable key to collect a token. Send an email to developer
 
 Once you have it:
 
-[MercadoPago setPublishableKey:@"your_publishable_key"];
+	[MercadoPago setPublishableKey:@"your_publishable_key"];
 
 You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWithOptions' method.
 
-### Processing payments with Credit Card (simple way, no installments)
+### Processing payments with Credit Card
 
 #### Argentina, Venezuela & Brasil
 
@@ -64,9 +64,9 @@ Then send it to MercadoPago:
 
 Coming soon.
 
-### Processing payments with Credit Card (a bit complex, with installments)
+### Processing payments with Credit Card (with installments)
 
-Coming soon.
+Doc coming soon (the code is already there)
 
 ### Processing payments with Debit Card
 
@@ -77,18 +77,19 @@ Coming soon (only in México)
 Once you've collected a token, you can send the tokenId to your server to charge immediately your customer.
 
 From your server:
-curl -X POST \
-	 -H 'accept: application/json' \
-	 -H 'content-type: application/json' \
-	 https://api.mercadolibre.com/checkout/custom/create_payment?access_token=your_access_token \
-	 -d '{
-      "amount": 10,
-      "reason": "Item Title",
-      "installments": 1,
-      "payment_code": "tokenId",
-      "payer_email": "payer@email.com",
-      "external_reference": "1234_your_reference"
-	 }'
+
+	curl -X POST \
+		 -H 'accept: application/json' \
+		 -H 'content-type: application/json' \
+		 https://api.mercadolibre.com/checkout/custom/create_payment?access_token=your_access_token \
+		 -d '{
+	      "amount": 10,
+	      "reason": "Item Title",
+	      "installments": 1,
+	      "payment_code": "tokenId",
+	      "payer_email": "payer@email.com",
+	      "external_reference": "1234_your_reference"
+		 }'
 
 ### Handling errors
 
