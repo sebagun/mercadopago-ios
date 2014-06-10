@@ -4,7 +4,7 @@ The MercadoPago iOS SDK make it easy to collect your users' credit card details 
 
 ## Installation
 
-There are two ways to add Stripe to your project:
+There are two ways to add MercadoPago to your project:
 
 ### Copy manually
 
