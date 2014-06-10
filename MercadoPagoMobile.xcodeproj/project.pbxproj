@@ -35,9 +35,6 @@
 		CF6A025719211A9C00A8ACB5 /* MPExceptionsByCardIssuer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A025619211A9C00A8ACB5 /* MPExceptionsByCardIssuer.m */; };
 		CF6A025A1921414500A8ACB5 /* MPCardToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6A02591921414500A8ACB5 /* MPCardToken.m */; };
 		CFC617FC1929158C00CCB6F3 /* MPExtraDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC617FB1929158C00CCB6F3 /* MPExtraDataViewController.m */; };
-		CFC61800192A7A0D00CCB6F3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC617FF192A7A0D00CCB6F3 /* CoreTelephony.framework */; };
-		CFC61802192A7A1F00CCB6F3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC61801192A7A1F00CCB6F3 /* Security.framework */; };
-		CFC61804192A7A3700CCB6F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC61803192A7A3700CCB6F3 /* CoreLocation.framework */; };
 		CFD52DBC1926455100CCBB80 /* MPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD52DBB1926455100CCBB80 /* MPUtils.m */; };
 		CFDB88AA19463B6600693CF5 /* BPXLUUIDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDB88A419463B6600693CF5 /* BPXLUUIDHandler.m */; };
 		CFDB88AB19463B6600693CF5 /* UIDevice+MKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDB88A719463B6600693CF5 /* UIDevice+MKAdditions.m */; };
@@ -102,9 +99,6 @@
 		CF6A02591921414500A8ACB5 /* MPCardToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPCardToken.m; sourceTree = "<group>"; };
 		CFC617FA1929158C00CCB6F3 /* MPExtraDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPExtraDataViewController.h; sourceTree = "<group>"; };
 		CFC617FB1929158C00CCB6F3 /* MPExtraDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPExtraDataViewController.m; sourceTree = "<group>"; };
-		CFC617FF192A7A0D00CCB6F3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		CFC61801192A7A1F00CCB6F3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		CFC61803192A7A3700CCB6F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CFD52DBA1926455100CCBB80 /* MPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPUtils.h; sourceTree = "<group>"; };
 		CFD52DBB1926455100CCBB80 /* MPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPUtils.m; sourceTree = "<group>"; };
 		CFDB88A319463B6600693CF5 /* BPXLUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLUUIDHandler.h; sourceTree = "<group>"; };
@@ -120,9 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFC61804192A7A3700CCB6F3 /* CoreLocation.framework in Frameworks */,
-				CFC61802192A7A1F00CCB6F3 /* Security.framework in Frameworks */,
-				CFC61800192A7A0D00CCB6F3 /* CoreTelephony.framework in Frameworks */,
 				CF6A02051919338100A8ACB5 /* CoreGraphics.framework in Frameworks */,
 				CF6A02071919338100A8ACB5 /* UIKit.framework in Frameworks */,
 				CF6A02031919338100A8ACB5 /* Foundation.framework in Frameworks */,
@@ -201,9 +192,6 @@
 		CF6A02011919338100A8ACB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CFC61803192A7A3700CCB6F3 /* CoreLocation.framework */,
-				CFC61801192A7A1F00CCB6F3 /* Security.framework */,
-				CFC617FF192A7A0D00CCB6F3 /* CoreTelephony.framework */,
 				CF6A02021919338100A8ACB5 /* Foundation.framework */,
 				CF6A02041919338100A8ACB5 /* CoreGraphics.framework */,
 				CF6A02061919338100A8ACB5 /* UIKit.framework */,
