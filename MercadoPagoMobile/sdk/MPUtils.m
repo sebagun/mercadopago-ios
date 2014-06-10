@@ -14,14 +14,14 @@
 
 @implementation MPUtils
 
-+(void) validateCardBin:(NSString *)bin error:(NSError **) error
++(BOOL) validateCardBin:(NSString *)bin error:(NSError **) error
 {
     if (!bin ||
         [bin length] < 6 ||
         ![[self class] isNumericString:bin]) {
         
         *error = [NSError errorWithDomain:MercadoPagoDomain
-                                     code:MPBinError
+                                     code:MPCardError
                                  userInfo:@{
                                             NSLocalizedDescriptionKey : MPCardErrorInvalidNumberUserMessage,
                                             MPErrorParameterKey : @"cardNumber",
@@ -29,8 +29,10 @@
                                             MPErrorMessageKey : @"invalid card bin, cannot be nil and has to be at least 6 digits"
                                             }
                   ];
+        return NO;
         
     }
+    return YES;
 }
 
 +(BOOL) isNumericString: (NSString *) aString
@@ -145,6 +147,69 @@
                                              }];
 }
 
++ (NSError *) createErrorWithTokenResponse: (id) json HTTPstatus: (NSInteger) status
+{
+    NSString *userMessage;
+    NSString *parameter;
+    NSString *cardErrorCode;
+    NSString *devMessage;
+    
+    if (status == 400) {
+        //Bad Request errors
+        if ([json isKindOfClass:[NSDictionary class]]) {
+            devMessage = [json objectForKey:@"message"];
+            NSString *code = [(NSDictionary *)[(NSArray *) [json objectForKey:@"cause"] objectAtIndex:0] objectForKey:@"code"];
+            if ([@[@"E202",@"E301"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidNumberUserMessage;
+                parameter = @"cardNumber";
+                cardErrorCode = MPInvalidCardNumber;
+            }else if([@[@"324",@"214"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidCardholderIDNumberUserMessage;
+                parameter = @"cardholderIDNumber";
+                cardErrorCode = MPInvalidCardholderIDNumber;
+            }else if([@[@"323",@"213"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidCardholderIDSubTypeUserMessage;
+                parameter = @"cardholderIDSubType";
+                cardErrorCode = MPInvalidCardholderIDSubType;
+            }else if([@[@"322",@"212"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidCardholderIDTypeUserMessage;
+                parameter = @"cardholderIDType";
+                cardErrorCode = MPInvalidCardholderIDType;
+            }else if([@[@"316",@"221"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidCardholderNameUserMessage;
+                parameter = @"cardholderName";
+                cardErrorCode = MPInvalidCardholderName;
+            }else if([@[@"301",@"208",@"325",@"326",@"702",@"209"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidExpMonthUserMessage;
+                parameter = @"expirationMonth";
+                cardErrorCode = MPInvalidExpirationMonth;
+            }else if([@[@"E203",@"E302"] containsObject:code]) {
+                userMessage = MPCardErrorInvalidSecurityCodeUserMessage;
+                parameter = @"securityCode";
+                cardErrorCode = MPInvalidSecurityCode;
+            }
+        }else{
+            userMessage = MPTokenApiCallErrorUserMessage;
+            devMessage = @"Error from API creating token with card info";
+        }
+    } else {
+        //Other errors (less commons)
+        userMessage = MPTokenApiCallErrorUserMessage;
+        devMessage = @"Error from API creating token with card info";
+    }
+    
+    return [[NSError alloc] initWithDomain:MercadoPagoDomain
+                                      code:MPHttpError
+                                  userInfo:@{
+                                             NSLocalizedDescriptionKey : userMessage,
+                                             MPErrorParameterKey : parameter,
+                                             MPCardErrorCodeKey : cardErrorCode,
+                                             MPErrorMessageKey : devMessage,
+                                             MPHttpStatusKey : [NSString stringWithFormat:@"%ld", (long)status],
+                                             MPApiErrorResponseKey : json
+                                             }];
+}
+
 + (NSError *)createErrorWithMessage:(NSString *)userMessage parameter:(NSString *)parameter cardErrorCode:(NSString *)cardErrorCode devErrorMessage:(NSString *)devMessage
 {
     return [[NSError alloc] initWithDomain:MercadoPagoDomain
@@ -155,5 +220,31 @@
                                              MPCardErrorCodeKey : cardErrorCode,
                                              MPErrorMessageKey : devMessage
                                              }];
+}
+
++ (NSArray *) argentinaValidCardholderIDTypes
+{
+    return @[@"DNI", @"CI", @"LC", @"LE", @"Otro"];
+}
++ (NSArray *) brasilValidCardholderIDTypes
+{
+    return @[@"CNPJ", @"CPF"];
+}
++ (NSArray *) venezuelaValidCardholderIDTypes
+{
+    return @[@"CI", @"RIF", @"Pasaporte"];
+}
++ (NSArray *) mexicoValidCardholderIDTypes
+{
+    return @[@"RFC", @"Pasaporte", @"Otro"];
+}
++ (NSArray *) colombiaValidCardholderIDTypes
+{
+    return @[@"CC", @"CE", @"NIT", @"Otro"];
+}
+
++ (NSArray *) venezuelaValidCardholderIDSubTypes
+{
+    return @[@"J", @"P", @"V", @"E", @"G"];
 }
 @end

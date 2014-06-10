@@ -12,6 +12,7 @@
 
 @interface MPExtraDataViewController : UIViewController
 
-@property (weak, nonatomic) MPCard *card;
+@property (strong, nonatomic) MPCard *card;
+@property (nonatomic) NSInteger installments;
 
 @end

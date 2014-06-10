@@ -88,9 +88,8 @@ UIGestureRecognizer *tapper;
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 [resultController setResultInfo:result];
                                             });
-                                            //Post token to your server so you can create the payment from there
-                                            //If the user selected installments, you will need that info in your server
-                                            //TODO: YOUR CODE HERE...
+                                            //TODO: your code here.
+                                            //send token, installments, customer email, etc. to your server
                                         }
                                         onFailure:^(NSError *error){
                                             NSLog(@"Error creating token: %@",error);

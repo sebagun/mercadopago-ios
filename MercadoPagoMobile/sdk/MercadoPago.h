@@ -17,11 +17,12 @@
 //Your MercadoPago public key.
 + (NSString *) publishableKey;
 + (void) setPublishableKey: (NSString *) key;
-
-//Gets the payment method info for a card bin (first six numbers)
-+ (void) paymentMethodForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure;
++ (void)validateKey;
 
 //creates a "One use Token" with the collected card info. You will later need this token to create a payment from your server
 + (void) createTokenWithCard:(MPCard *) card onSuccess:(void (^)(MPCardToken *)) success onFailure:(void (^)(NSError *)) failure;
+
+//Gets the payment method info for a card bin (first six numbers)
++ (void) paymentMethodForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure;
 
 @end

@@ -17,8 +17,21 @@
 
 @implementation MercadoPago
 
++ (id)alloc
+{
+    [NSException raise:@"CannotInstantiateStaticClass" format:@"'MercadoPago' is a static class and cannot be instantiated."];
+    return nil;
+}
+
 + (void) createTokenWithCard:(MPCard *) card onSuccess:(void (^)(MPCardToken *)) success onFailure:(void (^)(NSError *)) failure
 {
+    [[self class] validateKey];
+    
+    if (success == nil)
+        [NSException raise:@"RequiredParameter" format:@"'success' is required to use the token that is created"];
+    if (failure == nil)
+        [NSException raise:@"RequiredParameter" format:@"'failure' is required."];
+    
     //Validate card
     NSError *error;
     if(![card validateCardReturningError:&error]){
@@ -32,6 +45,7 @@
     
     //Build JSON
     NSDictionary *json = [card buildJSON];
+    
     //Handle JSON success response from API
     MPSuccessRequestHandler successHandler = ^(id json, NSInteger statusCode){
         MPCardToken *token = [[MPCardToken alloc] initFromDictionary:json];
@@ -54,10 +68,11 @@
 
 + (void) paymentMethodForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure
 {
-    NSError *validationError;
-    [MPUtils validateCardBin:bin error:&validationError];
+    [[self class] validateKey];
     
-    if (validationError) {
+    NSError *validationError;
+    
+    if ([MPUtils validateCardBin:bin error:&validationError] && validationError) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                        ^(){
                            failure(validationError);
@@ -68,15 +83,19 @@
     
     //Handle JSON success response from API
     MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
-        /*
-         Ugly, I know!!!! but it's the only way. Some Mastercard issuers in Argentina use the same bin,
-         so the API will return more than one payment_method in those cases. This could be better in future.
-        */
-        NSDictionary *json = [(NSArray *)jsonArr objectAtIndex:0];
+        
+        NSArray *arr = (NSArray *)jsonArr;
+        
+        if ([arr count] > 1) {
+            //Not possible now. In the past some bins had more than one payment method.
+        }
+        
+        NSDictionary *json = [arr objectAtIndex:0];
         
         MPPaymentMethod *p = [[MPPaymentMethod alloc]initFromDictionary:json];
         success(p);
     };
+    
     //Handle failure response from API or error
     MPFailureRequestHandler failureHandler = ^(id json, NSInteger statusCode, NSError *error){
         if (error) {
@@ -86,6 +105,7 @@
             failure(apiError);
         }
     };
+    
     //GET payment method with the bin
     MPJSONRestClient *client = [[MPJSONRestClient alloc] init];
     [client getJSONFromUrl: [NSString stringWithFormat:@"https://api.mercadolibre.com/checkout/custom/payment_methods/search?public_key=%@&bin=%@",publishableKey, bin] onSuccess:s onFailure:failureHandler];
@@ -101,7 +121,15 @@ static NSString *publishableKey;
 }
 + (void) setPublishableKey: (NSString *) key
 {
+    if (!key || [key isEqualToString:@""])
+        [NSException raise:@"InvalidPublishableKey" format:@"You must use a valid publishable key to create a token."];
+    
     publishableKey = key;
+}
++ (void)validateKey
+{
+    if (!publishableKey || [publishableKey isEqualToString:@""])
+        [NSException raise:@"InvalidPublishableKey" format:@"You must use a valid publishable key to create a token."];
 }
 
 @end

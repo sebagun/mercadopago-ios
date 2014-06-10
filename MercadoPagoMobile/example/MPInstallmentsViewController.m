@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *installmentsPicker;
 @property (weak, nonatomic) IBOutlet UILabel *totalAmountLabel;
 
+@property (nonatomic) NSInteger installments;
+
 //This is a bean where you store the payment method info from the credit card
 @property (strong, nonatomic) MPPaymentMethod *paymentMethod;
 
@@ -42,18 +44,15 @@
 {
     [super viewDidAppear:animated];
     if (!self.paymentMethod) {
-        [MercadoPago paymentMethodForCardBin: [self.card cardBin]
-                                   onSuccess:^(MPPaymentMethod *paymentMethodResponse){
-                                       NSLog(@"Payment method info: %@",paymentMethodResponse);
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           self.paymentMethod = paymentMethodResponse;
-                                           [self.installmentsPicker reloadAllComponents];
-                                       });
-                                   }
-                                   onFailure:^(NSError *error){
-                                       NSLog(@"Error getting payment method info %@",error);
-                                   }
-         ];
+        [self.card fillPaymentMethodExecutingOnSuccess:^(MPPaymentMethod *paymentMethodResponse){
+            NSLog(@"Payment method info: %@",paymentMethodResponse);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.paymentMethod = paymentMethodResponse;
+                [self.installmentsPicker reloadAllComponents];
+            });
+        } onFailure:^(NSError *error){
+            NSLog(@"Error getting payment method info %@",error);
+        }];
     }
 }
 
@@ -64,7 +63,7 @@
      if ([segue.identifier isEqualToString:@"ask extra data"]) {
          MPExtraDataViewController *extraDataController = (MPExtraDataViewController *) segue.destinationViewController;
          extraDataController.card = self.card;
-         //HERE you may pass the installments the user selected. Then post that info to your server together with the card token
+         extraDataController.installments = self.installments;
      }
  }
 
@@ -79,6 +78,7 @@
         NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:@"100"];//TODO: item amount harcoded
         NSString *label = [NSString stringWithFormat:@"Total: $%@",[costInfo totalAmountForAmount: amount]];
         self.totalAmountLabel.text = label;
+        self.installments = [costInfo.installments integerValue];
     }
 }
 

@@ -39,6 +39,9 @@
 		CFC61802192A7A1F00CCB6F3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC61801192A7A1F00CCB6F3 /* Security.framework */; };
 		CFC61804192A7A3700CCB6F3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC61803192A7A3700CCB6F3 /* CoreLocation.framework */; };
 		CFD52DBC1926455100CCBB80 /* MPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD52DBB1926455100CCBB80 /* MPUtils.m */; };
+		CFDB88AA19463B6600693CF5 /* BPXLUUIDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDB88A419463B6600693CF5 /* BPXLUUIDHandler.m */; };
+		CFDB88AB19463B6600693CF5 /* UIDevice+MKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDB88A719463B6600693CF5 /* UIDevice+MKAdditions.m */; };
+		CFDB88AC19463B6600693CF5 /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDB88A919463B6600693CF5 /* UIDevice+Hardware.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,12 @@
 		CFC61803192A7A3700CCB6F3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CFD52DBA1926455100CCBB80 /* MPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPUtils.h; sourceTree = "<group>"; };
 		CFD52DBB1926455100CCBB80 /* MPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPUtils.m; sourceTree = "<group>"; };
+		CFDB88A319463B6600693CF5 /* BPXLUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLUUIDHandler.h; sourceTree = "<group>"; };
+		CFDB88A419463B6600693CF5 /* BPXLUUIDHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLUUIDHandler.m; sourceTree = "<group>"; };
+		CFDB88A619463B6600693CF5 /* UIDevice+MKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+MKAdditions.h"; sourceTree = "<group>"; };
+		CFDB88A719463B6600693CF5 /* UIDevice+MKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+MKAdditions.m"; sourceTree = "<group>"; };
+		CFDB88A819463B6600693CF5 /* UIDevice+Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Hardware.h"; sourceTree = "<group>"; };
+		CFDB88A919463B6600693CF5 /* UIDevice+Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Hardware.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +262,7 @@
 				CF3407F71934DD3500243083 /* MPError.m */,
 				CF6A0248192118C900A8ACB5 /* dto */,
 				CF6A023E191A6E2200A8ACB5 /* http client */,
+				CFDB88A119463B6600693CF5 /* device */,
 			);
 			path = sdk;
 			sourceTree = "<group>";
@@ -278,6 +288,35 @@
 				CF3407FA19378EAB00243083 /* payment method */,
 			);
 			path = dto;
+			sourceTree = "<group>";
+		};
+		CFDB88A119463B6600693CF5 /* device */ = {
+			isa = PBXGroup;
+			children = (
+				CFDB88A219463B6600693CF5 /* BPXLUUIDHandler */,
+				CFDB88A519463B6600693CF5 /* DeviceHelper */,
+				CFDB88A819463B6600693CF5 /* UIDevice+Hardware.h */,
+				CFDB88A919463B6600693CF5 /* UIDevice+Hardware.m */,
+			);
+			path = device;
+			sourceTree = "<group>";
+		};
+		CFDB88A219463B6600693CF5 /* BPXLUUIDHandler */ = {
+			isa = PBXGroup;
+			children = (
+				CFDB88A319463B6600693CF5 /* BPXLUUIDHandler.h */,
+				CFDB88A419463B6600693CF5 /* BPXLUUIDHandler.m */,
+			);
+			path = BPXLUUIDHandler;
+			sourceTree = "<group>";
+		};
+		CFDB88A519463B6600693CF5 /* DeviceHelper */ = {
+			isa = PBXGroup;
+			children = (
+				CFDB88A619463B6600693CF5 /* UIDevice+MKAdditions.h */,
+				CFDB88A719463B6600693CF5 /* UIDevice+MKAdditions.m */,
+			);
+			path = DeviceHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,11 +417,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFDB88AC19463B6600693CF5 /* UIDevice+Hardware.m in Sources */,
 				CFC617FC1929158C00CCB6F3 /* MPExtraDataViewController.m in Sources */,
 				CF6A0239191933C900A8ACB5 /* MPRequestService.m in Sources */,
 				CF6A020F1919338100A8ACB5 /* main.m in Sources */,
 				CF3407F81934DD3500243083 /* MPError.m in Sources */,
 				CFD52DBC1926455100CCBB80 /* MPUtils.m in Sources */,
+				CFDB88AB19463B6600693CF5 /* UIDevice+MKAdditions.m in Sources */,
+				CFDB88AA19463B6600693CF5 /* BPXLUUIDHandler.m in Sources */,
 				CF6A0251192119BE00A8ACB5 /* MPPayerCost.m in Sources */,
 				CF6A02191919338100A8ACB5 /* MPMainViewController.m in Sources */,
 				CF6A023D191A659000A8ACB5 /* MPJSONRestClient.m in Sources */,

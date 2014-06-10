@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MPPaymentMethod.h"
 
 @interface MPCard : NSObject
 
 /*
- Card info
+ Card info.
+ Required info (there are a few exceptions that not require security code)
  */
 @property (nonatomic, strong) NSString *cardNumber;
 @property (nonatomic, strong) NSString *securityCode;
@@ -19,12 +21,26 @@
 @property (nonatomic, strong) NSNumber *expirationYear;
 
 /*
- Cardholder info
+ Cardholder info.
+ Not all of these is required. Depends on the country
  */
 @property (nonatomic, strong) NSString *cardholderName;
 @property (nonatomic, strong) NSString *cardholderIDType;
 @property (nonatomic, strong) NSString *cardholderIDSubType;
 @property (nonatomic, strong) NSString *cardholderIDNumber;
+
+/*
+ Once you have 6 digits of the card number, you can get extra info about the card: 
+ country, issuer, installments and rates and card configurations like 
+ security code length, card number length, etc.
+ Calling this you feed the built-in validators with more info.
+ THIS IS DONE ASYNC.
+ */
+-(void) fillPaymentMethodExecutingOnSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure;
+/*
+ The payment method also remains available outside the completion handler using the getter.
+ */
+- (MPPaymentMethod *) paymentMethod;
 
 /*
  Key-value validation, as described here:
@@ -34,6 +50,8 @@
 - (BOOL)validateSecurityCode:(id *)ioValue error:(NSError **)outError;
 - (BOOL)validateExpirationMonth:(id *)ioValue error:(NSError **)outError;
 - (BOOL)validateExpirationYear:(id *)ioValue error:(NSError **)outError;
+- (BOOL)validateCardholderIDType:(id *)ioValue error:(NSError **)outError;
+- (BOOL)validateCardholderIDSubType:(id *)ioValue error:(NSError **)outError;
 
 /*
  All in one card validation.
@@ -46,7 +64,7 @@
  Used by [MercadoPago createTokenWithCard:]
  
  Build a json (NSDictionary) to request a MPCardToken.
- First validate the card before calling this.
+ HINT: use validator to validate the card before requesting a token.
  */
 - (NSDictionary *) buildJSON;
 

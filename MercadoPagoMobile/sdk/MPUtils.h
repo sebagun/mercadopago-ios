@@ -14,7 +14,7 @@
 @interface MPUtils : NSObject
 
 //Validates if the string is a valid card bin (first 6 number of the credit card)
-+(void) validateCardBin:(NSString *)bin error:(NSError **) error;
++(BOOL) validateCardBin:(NSString *)bin error:(NSError **) error;
 
 +(BOOL) isNumericString: (NSString *) aString;
 
@@ -36,7 +36,21 @@
 //Creates an error from an api call error, with it's json and http_status. You also have to provide the user message
 + (NSError *) createErrorWithJSON: (id) json HTTPstatus: (NSInteger) status userMessage:(NSString *) userMessage;
 
+//Handle errors from API where creating a token
++ (NSError *) createErrorWithTokenResponse: (id) json HTTPstatus: (NSInteger) status;
+
 //Creates an error for a card error.
 + (NSError *) createErrorWithMessage:(NSString *)userMessage parameter:(NSString *)parameter cardErrorCode:(NSString *)cardErrorCode devErrorMessage:(NSString *)devMessage;
+
+/*
+ Valid Cardholder identification types by country
+ */
++ (NSArray *) argentinaValidCardholderIDTypes;
++ (NSArray *) brasilValidCardholderIDTypes;
++ (NSArray *) venezuelaValidCardholderIDTypes;
++ (NSArray *) mexicoValidCardholderIDTypes;
++ (NSArray *) colombiaValidCardholderIDTypes;
+
++ (NSArray *) venezuelaValidCardholderIDSubTypes;
 
 @end

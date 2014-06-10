@@ -11,6 +11,6 @@
 
 @interface MPInstallmentsViewController : UIViewController<UIPickerViewDelegate>
 
-@property (nonatomic, weak) MPCard *card;
+@property (nonatomic, strong) MPCard *card;
 
 @end

@@ -9,10 +9,17 @@
 #import "MPCard.h"
 #import "MPError.h"
 #import "MPUtils.h"
+#import "UIDevice+Hardware.h"
+#import "MPJSONRestClient.h"
+#import "MercadoPago.h"
 
 @interface MPCard ()
 
 + (BOOL)handleValidationErrorForParameter:(NSString *)parameter error:(NSError **)outError;
+
+@property (nonatomic) BOOL paymentMethodCallInProgress;
+@property (nonatomic) NSString *cardBinGuessed;
+@property (nonatomic, strong) MPPaymentMethod *paymentMethod;
 
 @end
 
@@ -36,9 +43,10 @@
 {
     if (*ioValue == nil) {
         //Some credit cards do not require CVC
+        //TODO: better validation, first get payment method data from API to know the card configuration
         return YES;
     }
-    NSString *ioValueString = [(NSString *) *ioValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *ioValueString = (NSString *) *ioValue;
     
     BOOL validLength = ([ioValueString length] >= 3 && [ioValueString length] <= 4);
     
@@ -88,6 +96,46 @@
     return YES;
 }
 
+- (BOOL)validateCardholderIDType:(id *)ioValue error:(NSError **)outError
+{
+    if (*ioValue == nil) {
+        //In mexico, all the cardholder identification info is optional.
+        //TODO: better validation by country of the credit card, need to get the payment method before
+        return YES;
+    }
+    
+    NSString *ioValueString = (NSString *) *ioValue;
+    
+    if (![[MPUtils argentinaValidCardholderIDTypes] containsObject:ioValueString]   &&
+        ![[MPUtils brasilValidCardholderIDTypes] containsObject:ioValueString]      &&
+        ![[MPUtils venezuelaValidCardholderIDTypes] containsObject:ioValueString]   &&
+        ![[MPUtils mexicoValidCardholderIDTypes] containsObject:ioValueString]      &&
+        ![[MPUtils colombiaValidCardholderIDTypes] containsObject:ioValueString]) {
+        return [[self class] handleValidationErrorForParameter:@"cardholderIDType" error:outError];
+    }
+    
+    return YES;
+}
+
+- (BOOL)validateCardholderIDSubType:(id *)ioValue error:(NSError **)outError
+{
+    if (*ioValue == nil) {
+        //TODO: better validation by country from payment method info
+        return YES;
+    }
+    NSString *ioValueString = (NSString *) *ioValue;
+    
+    if (![[MPUtils venezuelaValidCardholderIDSubTypes] containsObject:ioValueString]){
+        return [[self class] handleValidationErrorForParameter:@"cardholderIDSubType" error:outError];
+    }
+    
+    //TODO: check invalid combinations of IDType and IDSubType
+    //(docType == "CI") &&  !(subDocType in ["V","E"]) ==> error
+    //(docType == "RIF") &&  !(subDocType in ["J", "P", "V", "E", "G"]) ==> error
+    
+    return YES;
+}
+
 /*
  Full validator
  */
@@ -97,11 +145,15 @@
     NSNumber *expMonthRef = [self expirationMonth];
     NSNumber *expYearRef = [self expirationYear];
     NSString *cvcRef = [self securityCode];
+    NSString *cardholderIDTypeRef = [self cardholderIDType];
+    NSString *cardholderIDSubTypeRef = [self cardholderIDSubType];
     
     return [self validateCardNumber:&numberRef error:outError] &&
     [self validateExpirationYear:&expYearRef error:outError] &&
     [self validateExpirationMonth:&expMonthRef error:outError] &&
-    [self validateSecurityCode:&cvcRef error:outError];
+    [self validateSecurityCode:&cvcRef error:outError] &&
+    [self validateCardholderIDType:&cardholderIDTypeRef error:outError] &&
+    [self validateCardholderIDSubType:&cardholderIDSubTypeRef error:outError];
 }
 
 - (NSDictionary *) buildJSON
@@ -124,6 +176,12 @@
     [cardholder setObject:document forKey:@"identification"];
     [json setObject:cardholder forKey:@"cardholder"];
     
+    //Include device info for fraud prevention. If you remove this, you will have more payments rejections.
+    NSDictionary *fingerprint = [[UIDevice currentDevice] fingerPrint];
+    NSDictionary *deviceInfo = [NSDictionary dictionaryWithObject:fingerprint forKey:@"fingerprint"];
+    NSArray *deviceArray = [NSArray arrayWithObject:deviceInfo];
+    [json setObject:deviceArray forKey:@"device_info"];
+    
     return json;
 }
 - (NSString *) cardBin
@@ -132,6 +190,63 @@
         return [self.cardNumber substringToIndex:6];
     }
     return nil;
+}
+
+- (MPPaymentMethod *) paymentMethod
+{
+    return _paymentMethod;
+}
+-(void) fillPaymentMethodExecutingOnSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure
+{
+    [MercadoPago validateKey];
+    
+    if (success == nil)
+        [NSException raise:@"RequiredParameter" format:@"'success' is required"];
+    if (failure == nil)
+        [NSException raise:@"RequiredParameter" format:@"'failure' is required"];
+    
+    NSError *validationError;
+    NSString *cardBin = [self cardBin];
+    
+    if ([MPUtils validateCardBin:cardBin error:&validationError] && validationError) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                       ^(){
+                           failure(validationError);
+                       }
+                       );
+        return;
+    }
+    
+    //Handle JSON success response from API
+    MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
+        
+        NSArray *arr = (NSArray *)jsonArr;
+        
+        if ([arr count] > 1) {
+            //Not possible now. In the past some bins had more than one payment method. It's not happening now
+        }
+        
+        NSDictionary *json = [arr objectAtIndex:0];
+        
+        self.paymentMethod = [[MPPaymentMethod alloc]initFromDictionary:json];
+        self.cardBinGuessed = cardBin;
+        success(_paymentMethod);
+    };
+    
+    //Handle failure response from API or error
+    MPFailureRequestHandler failureHandler = ^(id json, NSInteger statusCode, NSError *error){
+        if (error) {
+            failure(error);
+        }else{
+            NSError *apiError = [MPUtils createErrorWithJSON:json HTTPstatus:statusCode userMessage:MPPaymentMethodApiCallErrorUserMessage];
+            failure(apiError);
+        }
+    };
+    
+    //GET payment method with the bin
+    MPJSONRestClient *client = [[MPJSONRestClient alloc] init];
+    [client getJSONFromUrl: [NSString stringWithFormat:@"https://api.mercadolibre.com/checkout/custom/payment_methods/search?public_key=%@&bin=%@",[MercadoPago publishableKey], [self cardBin]] onSuccess:s onFailure:failureHandler];
+    self.paymentMethodCallInProgress = YES;
 }
 
 #pragma mark -
@@ -159,6 +274,16 @@
                                            parameter:parameter
                                        cardErrorCode:MPInvalidExpirationYear
                                      devErrorMessage:@"expirationYear must be this year or a year in the future"];
+        else if ([parameter isEqualToString:@"cardholderIDType"])
+            *outError = [MPUtils createErrorWithMessage:MPCardErrorInvalidCardholderIDTypeUserMessage
+                                              parameter:parameter
+                                          cardErrorCode:MPInvalidCardholderIDType
+                                        devErrorMessage:@"cardholderIDType invalid"];
+        else if ([parameter isEqualToString:@"cardholderIDSubType"])
+            *outError = [MPUtils createErrorWithMessage:MPCardErrorInvalidCardholderIDSubTypeUserMessage
+                                              parameter:parameter
+                                          cardErrorCode:MPInvalidCardholderIDSubType
+                                        devErrorMessage:@"cardholderIDSubType invalid"];
     }
     return NO; //there was an error, so validation is NO and you will have to check the NSError detail
 }

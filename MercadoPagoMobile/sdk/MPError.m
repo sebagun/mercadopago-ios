@@ -20,5 +20,8 @@ NSString *const MPInvalidCardNumber = @"com.mercadopago.lib:InvalidCardNumber";
 NSString *const MPInvalidExpirationMonth = @"com.mercadopago.lib:InvalidExpirationMonth";
 NSString *const MPInvalidExpirationYear = @"com.mercadopago.lib:InvalidExpirationYear";
 NSString *const MPInvalidSecurityCode = @"com.mercadopago.lib:InvalidSecurityCode";
-
+NSString *const MPInvalidCardholderName = @"com.mercadopago.lib:InvalidCardholderName";
+NSString *const MPInvalidCardholderIDNumber = @"com.mercadopago.lib:InvalidCardholderIDNumber";
+NSString *const MPInvalidCardholderIDType = @"com.mercadopago.lib:InvalidCardholderIDType";
+NSString *const MPInvalidCardholderIDSubType = @"com.mercadopago.lib:InvalidCardholderIDSubType";
 NSString *const MPExpiredCard = @"com.mercadopago.lib:ExpiredCard";
