@@ -1,6 +1,6 @@
 //
-//  MPCheckout.m
-//  SdkVendedor
+//  MercadoPago.m
+//  MercadoPagoMobile
 //
 //  Created by jgyonzo on 5/7/14.
 //  Copyright (c) 2014 MercadoPago. All rights reserved.

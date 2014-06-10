@@ -1,13 +1,12 @@
 //
-//  MPCheckout.h
-//  SdkVendedor
+//  MercadoPago.h
+//  MercadoPagoMobile
 //
 //  Created by jgyonzo on 5/7/14.
 //  Copyright (c) 2014 MercadoPago. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "MPJSONRestClient.h"
 #import "MPCard.h"
 #import "MPCardToken.h"
 #import "MPPaymentMethod.h"

@@ -1,6 +1,6 @@
 //
-//  MPCardInfo.h
-//  SdkVendedor
+//  MPCardToken.h
+//  MercadoPagoMobile
 //
 //  Created by jgyonzo on 5/12/14.
 //  Copyright (c) 2014 MercadoPago. All rights reserved.
@@ -14,7 +14,13 @@
  */
 @interface MPCardToken : NSObject
 
+/*
+ This is the main attribute, you will need tokenId in your server
+ to charge your customer.
+ */
 @property (nonatomic, strong) NSString *tokenId;
+
+
 @property (nonatomic, strong) NSNumber *expirationMonth;
 @property (nonatomic, strong) NSNumber *expirationYear;
 @property (nonatomic, strong) NSString *cardId;
