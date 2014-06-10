@@ -27,6 +27,7 @@ Coming soon.
 First, you need a publishable key to collect a token. Send an email to developers@mercadopago.com to ask for your public key.
 
 Once you have it:
+
 [MercadoPago setPublishableKey:@"your_publishable_key"];
 
 You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWithOptions' method.
