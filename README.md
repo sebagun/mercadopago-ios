@@ -110,6 +110,6 @@ To validate 'MPCard' properties individually, you should use the following:
 	 - (BOOL)validateCardholderIDType:error:
 	 - (BOOL)validateCardholderIDSubType:error:
 
-These methods follow the validation method convention used by [key-value validation](http://developer.apple.com/library/mac/#documentation/cocoa/conceptual/KeyValueCoding/Articles/Validation.html).  So, you can use these methods by invoking them directly, or by calling '[card validateValue:forKey:error]' for a property on the 'STPCard' object.
+These methods follow the validation method convention used by [key-value validation](http://developer.apple.com/library/mac/#documentation/cocoa/conceptual/KeyValueCoding/Articles/Validation.html).  So, you can use these methods by invoking them directly, or by calling '[card validateValue:forKey:error]' for a property on the 'MPCard' object.
 
 When using these validation methods, you will want to set the property on your card object when a property does validate before validating the next property.  This allows the methods to use existing properties on the card correctly to validate a new property.  For example, validating '5' for the 'expirationMonth' property will return YES if no 'expirationYear' is set.  But if 'expirationYear' is set and you try to set 'expirationMonth' to 5 and the combination of 'expirationMonth' and 'expirationYear' is in the past, '5' will not validate.  The order in which you call the validate methods does not matter for this though.
