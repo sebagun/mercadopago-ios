@@ -12,6 +12,7 @@
 #import "UIDevice+Hardware.h"
 #import "MPJSONRestClient.h"
 #import "MercadoPago.h"
+#import "MPPaymentMethod.h"
 
 @interface MPCard ()
 
@@ -19,7 +20,7 @@
 
 @property (nonatomic) BOOL paymentMethodCallInProgress;
 @property (nonatomic) NSString *cardBinGuessed;
-@property (nonatomic, strong) MPPaymentMethod *paymentMethod;
+@property (nonatomic, strong) NSArray *paymentMethods;
 
 @end
 
@@ -192,11 +193,11 @@
     return nil;
 }
 
-- (MPPaymentMethod *) paymentMethod
+- (NSArray *) paymentMethods
 {
-    return _paymentMethod;
+    return _paymentMethods;
 }
--(void) fillPaymentMethodExecutingOnSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure
+-(void) fillPaymentMethodsExecutingOnSuccess:(void (^)(NSArray *)) success onFailure:(void (^)(NSError *)) failure
 {
     [MercadoPago validateKey];
     
@@ -219,18 +220,15 @@
     
     //Handle JSON success response from API
     MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
-        
         NSArray *arr = (NSArray *)jsonArr;
-        
-        if ([arr count] > 1) {
-            //Not possible now. In the past some bins had more than one payment method. It's not happening now
+        NSMutableArray *cleanArr = [[NSMutableArray alloc] initWithCapacity:[arr count]];
+        for (NSDictionary *paymentMethodJSON in arr) {
+            MPPaymentMethod *p = [[MPPaymentMethod alloc]initFromDictionary:paymentMethodJSON];
+            [cleanArr addObject:p];
         }
-        
-        NSDictionary *json = [arr objectAtIndex:0];
-        
-        self.paymentMethod = [[MPPaymentMethod alloc]initFromDictionary:json];
+        self.paymentMethods = cleanArr;
         self.cardBinGuessed = cardBin;
-        success(_paymentMethod);
+        success(cleanArr);
     };
     
     //Handle failure response from API or error

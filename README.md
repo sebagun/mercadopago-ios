@@ -22,7 +22,7 @@ Coming soon.
 
 ## Example app
 
-Coming soon.
+Coming soon. We are building it. See the 'example' folder under your own risk =)
 
 ## Integration
 
@@ -32,43 +32,79 @@ Once you have it:
 
 	[MercadoPago setPublishableKey:@"your_publishable_key"];
 
-You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWithOptions' method.
+Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWithOptions' method.
 
 ### Processing payments with Credit Card
 
-#### Argentina, Venezuela & Brasil
+#### Argentina, Venezuela & Brasil (no installments)
 
-After showing your view, create and populate a 'MPCard' with the details you collected:
+* After showing your view, create and populate a 'MPCard' with the details you collected.
 
-    MPCard *card = [[MPCard alloc] init];
-    card.cardNumber = @"4509953566233704";
-    card.expirationMonth = [NSNumber numberWithInt:12];
-    card.expirationYear = [NSNumber numberWithInt:2020];
-    card.securityCode = @"123";
-	card.cardholderName = @"APRO Test user";
-	card.cardholderIDType = @"DNI"; //Depends on the country. See MPUtils.h for possible values
-	//card.cardholderIDSubType = @"J"; //Only for Venezuela. See MPUtils for possible values
-	card.cardholderIDNumber = @"12345678";
+	    MPCard *card = [[MPCard alloc] init];
+	    card.cardNumber = @"4509953566233704";
+	    card.expirationMonth = [NSNumber numberWithInt:12];
+	    card.expirationYear = [NSNumber numberWithInt:2020];
+	    card.securityCode = @"123";
+		card.cardholderName = @"APRO Test user";
+		card.cardholderIDType = @"DNI"; //Depends on the country. See MPUtils.h for possible values
+		//card.cardholderIDSubType = @"J"; //Only for Venezuela. See MPUtils for possible values
+		card.cardholderIDNumber = @"12345678";
 
-Then send it to MercadoPago:
+* Then send it to MercadoPago.
+
+		 [MercadoPago createTokenWithCard:card
+			                    onSuccess:^(MPCardToken *tokenResponse){
+			                        //send tokenId, your customer email and whatever information needed to your server
+									//to charge your customer
+			                    }
+			                    onFailure:^(NSError *error){
+			                        //Handle error, see MPError.h
+			                    }
+		]
+
+#### México (no installments)
+
+* After showing your view, create and populate a 'MPCard' with the details you collected.
+
+	    MPCard *card = [[MPCard alloc] init];
+	    card.cardNumber = @"4357606415021810";
+	    card.expirationMonth = [NSNumber numberWithInt:12];
+	    card.expirationYear = [NSNumber numberWithInt:2020];
+	    card.securityCode = @"123";
+
+* Get 'payment_method_id' and 'issuer_id' from MercadoPago. You will later need this info to charge your customer from your server.
+
+		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethods){
+					//API could return more than one payment methods when the bin is unknown.
+					//Just keeping the credit_card method for this example.
+					for(MPPaymentMethod *p in paymentMethods) {
+						if([p.paymentTypeId isEqualsToString: @"credit_card"]){
+							//save p.paymentMethodId and p.issuer.issuerId
+							//later you will have to send them together with the token to your server
+						}
+					}
+				}
+		        onFailure:^(NSError *error){
+		            //Handle error
+					//¿Ask again for the card number?
+		        }
+		]
+
+* Then send it to MercadoPago.
 
 	 [MercadoPago createTokenWithCard:card
 		                    onSuccess:^(MPCardToken *tokenResponse){
-		                        //send tokenId, your customer email and whatever information needed to your server
-								//to charge the user
+		                        //send tokenId, paymentMethodId, issuerId, your customer email 
+								//and whatever information needed to your server to charge your customer
 		                    }
 		                    onFailure:^(NSError *error){
 		                        //Handle error, see MPError.h
 		                    }
 	]
 
-#### México
+#### Installments
 
 Coming soon.
-
-### Processing payments with Credit Card (with installments)
-
-Doc coming soon (the code is already there)
 
 ### Processing payments with Debit Card
 
@@ -91,6 +127,8 @@ From your server:
 	      "payment_code": "tokenId",
 	      "payer_email": "payer@email.com",
 	      "external_reference": "1234_your_reference"
+		  "payment_method_id" : "visa",                   //Just for México
+		  "card_issuer_id":166                            //Just for México
 		 }'
 
 ### Handling errors

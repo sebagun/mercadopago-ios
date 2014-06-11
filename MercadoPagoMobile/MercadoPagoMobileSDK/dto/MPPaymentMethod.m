@@ -32,7 +32,7 @@
         self.paymentMethodId = [dict objectForKey:@"id"];
         self.name = [dict objectForKey:@"name"];
         self.paymentTypeId = [dict objectForKey:@"payment_type_id"];
-        self.issuerInfo = [[MPCardIssuer alloc] initFromDictionary:[dict objectForKey:@"card_issuer"]];
+        self.issuer = [[MPCardIssuer alloc] initFromDictionary:[dict objectForKey:@"card_issuer"]];
         self.siteId = [dict objectForKey:@"site_id"];
         self.secureThumbnail = [dict objectForKey:@"secure_thmubnail"];
         self.thumbnail = [dict objectForKey:@"thumbnail"];

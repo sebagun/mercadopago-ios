@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "MPCard.h"
 #import "MPCardToken.h"
-#import "MPPaymentMethod.h"
 
 @interface MercadoPago : NSObject
 
@@ -18,10 +17,17 @@
 + (void) setPublishableKey: (NSString *) key;
 + (void)validateKey;
 
-//creates a "One use Token" with the collected card info. You will later need this token to create a payment from your server
+/*
+ Creates a "One use Token" with the collected card info. You will later need this token to create a payment from your server.
+ */
 + (void) createTokenWithCard:(MPCard *) card onSuccess:(void (^)(MPCardToken *)) success onFailure:(void (^)(NSError *)) failure;
 
-//Gets the payment method info for a card bin (first six numbers)
-+ (void) paymentMethodForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure;
+/*
+ > You get a NSArray* of MPPaymentMethod in your success callback.
+ > Gets the possible payment methods using the card bin (first six numbers).
+ > Normally it will return just one. Just in México, in some cases it will return more than one if the API can't tell
+ if the bin belongs to a debit card or credit card.
+ */
++ (void) paymentMethodsForCardBin:(NSString *) bin onSuccess:(void (^)(NSArray *)) success onFailure:(void (^)(NSError *)) failure;
 
 @end

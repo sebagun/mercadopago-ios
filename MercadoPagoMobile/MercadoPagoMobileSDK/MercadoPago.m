@@ -10,6 +10,7 @@
 #import "MPJSONRestClient.h"
 #import "MPUtils.h"
 #import "MPError.h"
+#import "MPPaymentMethod.h"
 
 @interface MercadoPago ()
 
@@ -66,7 +67,7 @@
     [client postJSON:json toUrl:[NSString stringWithFormat:@"https://pagamento.mercadopago.com/card_tokens?public_key=%@",publishableKey] onSuccess:successHandler onFailure:failureHandler];
 }
 
-+ (void) paymentMethodForCardBin:(NSString *) bin onSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure
++ (void) paymentMethodsForCardBin:(NSString *) bin onSuccess:(void (^)(NSArray *)) success onFailure:(void (^)(NSError *)) failure
 {
     [[self class] validateKey];
     
@@ -83,17 +84,13 @@
     
     //Handle JSON success response from API
     MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
-        
         NSArray *arr = (NSArray *)jsonArr;
-        
-        if ([arr count] > 1) {
-            //Not possible now. In the past some bins had more than one payment method.
+        NSMutableArray *cleanArr = [[NSMutableArray alloc] initWithCapacity:[arr count]];
+        for (NSDictionary *paymentMethodJSON in arr) {
+            MPPaymentMethod *p = [[MPPaymentMethod alloc]initFromDictionary:paymentMethodJSON];
+            [cleanArr addObject:p];
         }
-        
-        NSDictionary *json = [arr objectAtIndex:0];
-        
-        MPPaymentMethod *p = [[MPPaymentMethod alloc]initFromDictionary:json];
-        success(p);
+        success(cleanArr);
     };
     
     //Handle failure response from API or error

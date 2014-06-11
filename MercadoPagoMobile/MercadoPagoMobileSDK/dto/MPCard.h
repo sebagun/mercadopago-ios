@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPPaymentMethod.h"
 
 @interface MPCard : NSObject
 
@@ -30,17 +29,17 @@
 @property (nonatomic, strong) NSString *cardholderIDNumber;
 
 /*
- Once you have 6 digits of the card number, you can get extra info about the card: 
- country, issuer, installments and rates and card configurations like 
- security code length, card number length, etc.
- Calling this you feed the built-in validators with more info.
- THIS IS DONE ASYNC.
+ > You get a NSArray* of MPPaymentMethod in your success callback.
+ > Gets the possible payment methods using the card bin (first six numbers).
+ > Normally it will return just one. Just in México, in some cases it will return more than one if the API can't tell
+ if the bin belongs to a debit card or credit card.
+ > Calling this you feed the built-in validators with more info.
  */
--(void) fillPaymentMethodExecutingOnSuccess:(void (^)(MPPaymentMethod *)) success onFailure:(void (^)(NSError *)) failure;
+-(void) fillPaymentMethodsExecutingOnSuccess:(void (^)(NSArray *)) success onFailure:(void (^)(NSError *)) failure;
 /*
- The payment method also remains available outside the completion handler using the getter.
+ The payment methods also remain available outside the completion handler using the getter.
  */
-- (MPPaymentMethod *) paymentMethod;
+- (NSArray *) paymentMethods;
 
 /*
  Key-value validation, as described here:

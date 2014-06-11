@@ -44,10 +44,10 @@
 {
     [super viewDidAppear:animated];
     if (!self.paymentMethod) {
-        [self.card fillPaymentMethodExecutingOnSuccess:^(MPPaymentMethod *paymentMethodResponse){
+        [self.card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethodResponse){
             NSLog(@"Payment method info: %@",paymentMethodResponse);
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.paymentMethod = paymentMethodResponse;
+                self.paymentMethod = paymentMethodResponse[0];
                 [self.installmentsPicker reloadAllComponents];
             });
         } onFailure:^(NSError *error){
