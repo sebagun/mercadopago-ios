@@ -102,9 +102,113 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 			                    }
 		]
 
-#### Installments
 
-Coming soon.
+#### Installments: Argentina, Venezuela & Brasil
+
+* After showing your view, create and populate a 'MPCard' with the details you collected.
+
+	    MPCard *card = [[MPCard alloc] init];
+	    card.cardNumber = @"4509953566233704";
+	    card.expirationMonth = [NSNumber numberWithInt:12];
+	    card.expirationYear = [NSNumber numberWithInt:2020];
+	    card.securityCode = @"123";
+		card.cardholderName = @"APRO Test user";
+		card.cardholderIDType = @"DNI"; //Depends on the country. See MPUtils.h for possible values
+		//card.cardholderIDSubType = @"J"; //Only for Venezuela. See MPUtils for possible values
+		card.cardholderIDNumber = @"12345678";
+
+* Retrieve payment method information from MercadoPago. You will get possible installments and the rate per installment.
+
+		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethods){
+					//For these countries, the API will return just one payment method inside the array.
+					MPPaymentMethod *p = paymentMethods[0];
+					[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
+				}
+		        onFailure:^(NSError *error){
+		            //Handle error
+					//¿Ask again for the card number?
+		        }
+		]
+		
+		- (void) showInstallmentsForPaymentMethod: (MPPaymentMethod *p) andAmount: (NSDecimalNumber) amount {
+			//show installments in your view (for example in a picker view)
+			for (MPPayerCost *cost in p.payerCosts){
+				NSNumber *installments = cost.installments; //qty of installments
+				NSDecimalNumber *installmentAmount = [cost installmentAmountForAmount:amount];
+				NSDecimalNumber *totalAmountToPay = [cost totalAmountForAmount:amount];
+				//update your view with this info.
+				//Save your customer installment selection to later send it to your server.
+			}
+		}
+
+
+* Then send it to MercadoPago.
+
+		 [MercadoPago createTokenWithCard:card
+			                    onSuccess:^(MPCardToken *tokenResponse){
+			                        //send tokenId, your customer email, installments selected
+									//and whatever information needed to your server
+									//to charge your customer
+			                    }
+			                    onFailure:^(NSError *error){
+			                        //Handle error, see MPError.h
+			                    }
+		]
+
+#### Installments: México
+
+* After showing your view, create and populate a 'MPCard' with the details you collected.
+
+	    MPCard *card = [[MPCard alloc] init];
+	    card.cardNumber = @"4509953566233704";
+	    card.expirationMonth = [NSNumber numberWithInt:12];
+	    card.expirationYear = [NSNumber numberWithInt:2020];
+	    card.securityCode = @"123";
+
+* Retrieve payment method information from MercadoPago. You will get possible installments and the rate per installment.
+
+		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethods){
+					//API could return more than one payment methods when the bin is unknown.
+					//Just keeping the credit_card method for this example.
+					for(MPPaymentMethod *p in paymentMethods) {
+						if([p.paymentTypeId isEqualsToString: @"credit_card"]){
+							//save p.paymentMethodId and p.issuer.issuerId
+							//later you will have to send them together with the token to your server
+							
+							[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
+						}
+					}
+				}
+		        onFailure:^(NSError *error){
+		            //Handle error
+					//¿Ask again for the card number?
+		        }
+		]
+		
+		- (void) showInstallmentsForPaymentMethod: (MPPaymentMethod *p) andAmount: (NSDecimalNumber) amount {
+			//show installments in your view (for example in a picker view)
+			for (MPPayerCost *cost in p.payerCosts){
+				NSNumber *installments = cost.installments; //qty of installments
+				NSDecimalNumber *installmentAmount = [cost installmentAmountForAmount:amount];
+				NSDecimalNumber *totalAmountToPay = [cost totalAmountForAmount:amount];
+				//update your view with this info.
+				//Save your customer installment selection to later send it to your server.
+			}
+		}
+
+
+* Then send it to MercadoPago.
+
+		 [MercadoPago createTokenWithCard:card
+			                    onSuccess:^(MPCardToken *tokenResponse){
+			                        //send tokenId, your customer email, installments selected, paymentMethodId, issuerId,
+									//and whatever information needed to your server
+									//to charge your customer
+			                    }
+			                    onFailure:^(NSError *error){
+			                        //Handle error, see MPError.h
+			                    }
+		]
 
 ### Processing payments with Debit Card
 
