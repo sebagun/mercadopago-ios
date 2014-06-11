@@ -92,15 +92,15 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 
 * Then send it to MercadoPago.
 
-	 [MercadoPago createTokenWithCard:card
-		                    onSuccess:^(MPCardToken *tokenResponse){
-		                        //send tokenId, paymentMethodId, issuerId, your customer email 
-								//and whatever information needed to your server to charge your customer
-		                    }
-		                    onFailure:^(NSError *error){
-		                        //Handle error, see MPError.h
-		                    }
-	]
+		 [MercadoPago createTokenWithCard:card
+			                    onSuccess:^(MPCardToken *tokenResponse){
+			                        //send tokenId, paymentMethodId, issuerId, your customer email 
+									//and whatever information needed to your server to charge your customer
+			                    }
+			                    onFailure:^(NSError *error){
+			                        //Handle error, see MPError.h
+			                    }
+		]
 
 #### Installments
 
