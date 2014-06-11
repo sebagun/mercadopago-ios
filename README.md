@@ -4,6 +4,12 @@ The MercadoPago iOS SDK make it easy to collect your users' credit card details 
 
 It is developed for iOS 7 or sooner.
 
+#### Quick links: processing payments with Credit Card.
+* [Argentina, Venezuela & Brasil (no installments)](README.md#argentina-venezuela--brasil-no-installments)
+* [México (no installments)](README.md#m%C3%A9xico-no-installments)
+* [Installments: Argentina, Venezuela & Brasil](README.md#installments-argentina-venezuela--brasil)
+* [Installments: México](README.md#installments-m%C3%A9xico)
+
 ## Installation
 
 There are two ways to add MercadoPago to your project:
