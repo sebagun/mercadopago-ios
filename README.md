@@ -131,11 +131,11 @@ From your server:
 		  "card_issuer_id":166                            //Just for México
 		 }'
 
-### Handling errors
+## Handling errors
 
 See MPError.h
 
-### Validation
+## Validation
 
 You have a few options for handling validation of credit card data on the client, depending on what your application does.  Client-side validation of credit card data is not required since our API will correctly reject invalid card information, but can be useful to validate information as soon as a user enters it, or simply to save a network request.
 
