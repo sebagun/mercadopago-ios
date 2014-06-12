@@ -77,6 +77,7 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 	    card.expirationMonth = [NSNumber numberWithInt:12];
 	    card.expirationYear = [NSNumber numberWithInt:2020];
 	    card.securityCode = @"123";
+		card.cardholderName = @"APRO Test user";
 
 * Get 'payment_method_id' and 'issuer_id' from MercadoPago. You will later need this info to charge your customer from your server.
 
@@ -129,22 +130,7 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 					//For these countries, the API will return just one payment method inside the array.
 					MPPaymentMethod *p = paymentMethods[0];
 					
-					if([p.exceptionsByCardIssuer count] > 0){
-						/*
-							Only possible in ARGENTINA. Sometimes we can't identify the issuer of some Mastercards
-							so we will send in p.payerCosts the default configuration
-							and in p.exceptionsByCardIssuer you will have all the possible issuers with "promos".
-							If this happens, let your customer choose the credit card issuer. 
-							Then use the payer costs from that issuer.
-							> For example, if he chooses the first issuer in the exceptions: 
-								p.exceptionsByCardIssuer[0].payerCosts
-							> If he chooses "other", then use the default:
-								p.payerCosts
-						*/
-					}else{
-						//The common case
-						[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
-					}
+					[self showInstallmentsForPaymentMethod: p.payerCosts andAmount: ##replace with your amount##];
 				}
 		        onFailure:^(NSError *error){
 		            //Handle error
@@ -152,9 +138,9 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 		        }
 		]
 		
-		- (void) showInstallmentsForPaymentMethod: (MPPaymentMethod *p) andAmount: (NSDecimalNumber) amount {
+		- (void) showInstallmentsForPayerCosts: (NSArray *) costs andAmount: (NSDecimalNumber) amount {
 			//show installments in your view (for example in a picker view)
-			for (MPPayerCost *cost in p.payerCosts){
+			for (MPPayerCost *cost in costs){
 				NSNumber *installments = cost.installments; //qty of installments
 				NSDecimalNumber *installmentAmount = [cost installmentAmountForAmount:amount];
 				NSDecimalNumber *totalAmountToPay = [cost totalAmountForAmount:amount];
@@ -177,6 +163,9 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 			                    }
 		]
 
+
+* NOTE: if you are collecting payments in Argentina with Mastercard, then you need to read this link (coming soon).
+
 #### Installments: México
 
 * After showing your view, create and populate a 'MPCard' with the details you collected.
@@ -186,18 +175,38 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 	    card.expirationMonth = [NSNumber numberWithInt:12];
 	    card.expirationYear = [NSNumber numberWithInt:2020];
 	    card.securityCode = @"123";
+		card.cardholderName = @"APRO Test user";
 
 * Retrieve payment method information from MercadoPago. You will get possible installments and the rate per installment.
 
 		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethods){
-					//API could return more than one payment methods when the bin is unknown.
-					//Just keeping the credit_card method for this example.
+					/*
+						API could return more than one payment methods when we don't know if the bin 
+						is from a credit card or debit card.
+						Just keeping the credit_card method for this example.
+					*/
 					for(MPPaymentMethod *p in paymentMethods) {
 						if([p.paymentTypeId isEqualsToString: @"credit_card"]){
-							//save p.paymentMethodId and p.issuer.issuerId
-							//later you will have to send them together with the token to your server
 							
-							[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
+							if ([p.exceptionsByCardIssuer count] > 0){
+								/*
+									If our API doesn't know exactly the issuer of the card, it will return
+									the default payer costs in p.payerCosts (just one installment) 
+									and other issuers options in p.exceptionsByCardIssuer.
+									You will have to ask your customer which is the issuer of his card.
+									For example, if he chooses the first issuer of the list:	
+								*/
+								NSString *paymentMethodId = p.paymentMethodId; //you will later need this in your server
+								NSNumber *issuerId = p.exceptionsByCardIssuer[0].issuer.issuerId; //you will later need this in your server
+								NSArray *payerCosts = p.exceptionsByCardIssuer[0].payerCosts;
+								
+								[self showInstallmentsForPayerCosts: payerCosts andAmount: ##replace with your amount##];
+							}else{
+								
+								NSString *paymentMethodId = p.paymentMethodId; //you will later need this in your server
+								NSNumber *issuerId = p.issuer.issuerId; //you will later need this in your server
+								[self showInstallmentsForPayerCosts: p.payerCosts andAmount: ##replace with your amount##];
+							}
 						}
 					}
 				}
@@ -207,9 +216,9 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 		        }
 		]
 		
-		- (void) showInstallmentsForPaymentMethod: (MPPaymentMethod *p) andAmount: (NSDecimalNumber) amount {
+		- (void) showInstallmentsForPayerCosts: (NSArray *) costs andAmount: (NSDecimalNumber) amount {
 			//show installments in your view (for example in a picker view)
-			for (MPPayerCost *cost in p.payerCosts){
+			for (MPPayerCost *cost in costs){
 				NSNumber *installments = cost.installments; //qty of installments
 				NSDecimalNumber *installmentAmount = [cost installmentAmountForAmount:amount];
 				NSDecimalNumber *totalAmountToPay = [cost totalAmountForAmount:amount];
@@ -250,7 +259,7 @@ From your server:
 	      "amount": 10,
 	      "reason": "Item Title",
 	      "installments": 1,
-	      "payment_code": "tokenId",
+	      "card_token_id": "tokenId",
 	      "payer_email": "payer@email.com",
 	      "external_reference": "1234_your_reference"
 		  "payment_method_id" : "visa",                   //Just for México

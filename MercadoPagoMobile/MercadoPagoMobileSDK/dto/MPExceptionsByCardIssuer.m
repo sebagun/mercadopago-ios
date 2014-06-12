@@ -15,7 +15,7 @@
 {
     if (self = [super init]){
         MPCardIssuer *issuer = [[MPCardIssuer alloc]initFromDictionary:[dict objectForKey:@"card_issuer"]];
-        self.issuerInfo = issuer;
+        self.issuer = issuer;
         self.labels = [dict objectForKey:@"label"];
         self.thumbnail = [dict objectForKey:@"thumbnail"];
         self.secureThumbnail = [dict objectForKey:@"secure_thumbnail"];

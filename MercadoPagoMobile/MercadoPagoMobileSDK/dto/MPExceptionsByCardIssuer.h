@@ -11,7 +11,7 @@
 
 @interface MPExceptionsByCardIssuer : NSObject
 
-@property (nonatomic,strong) MPCardIssuer *issuerInfo;
+@property (nonatomic,strong) MPCardIssuer *issuer;
 @property (nonatomic,strong) NSArray *labels;
 @property (nonatomic,strong) NSString *secureThumbnail;
 @property (nonatomic,strong) NSString *thumbnail;
