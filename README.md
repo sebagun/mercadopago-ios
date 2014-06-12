@@ -128,7 +128,19 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethods){
 					//For these countries, the API will return just one payment method inside the array.
 					MPPaymentMethod *p = paymentMethods[0];
-					[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
+					
+					if([p.exceptionsByCardIssuer count] > 0){
+						//Only possible in ARGENTINA. Sometimes we can't identify the issuer of some Mastercards
+						//so we will send in p.payerCosts the default configuration
+						//and in p.exceptionsByCardIssuer you will have all the possible issuers with "promos".
+						//If this happens, let your customer choose the credit card issuer. 
+						//Then use the payer costs from that issuer.
+						//For example, if he chooses the first issuer in the exceptions: 
+						//[p.exceptionsByCardIssuer[0].payerCosts]
+					}else{
+						//The common case
+						[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
+					}
 				}
 		        onFailure:^(NSError *error){
 		            //Handle error
