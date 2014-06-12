@@ -1,6 +1,6 @@
 # MercadoPago iOS SDK
 
-The MercadoPago iOS SDK makea it easy to collect your user's credit card details inside your iOS app. By creating [tokens](https://coming-soon), MercadoPago handles the bulk of PCI compliance by preventing sensitive card data from hitting your server.
+The MercadoPago iOS SDK make it easy to collect your users' credit card details inside your iOS app. By creating [tokens](https://coming-soon), MercadoPago handles the bulk of PCI compliance by preventing sensitive card data from hitting your server.
 
 It is developed for iOS 7 or sooner.
 
@@ -130,13 +130,17 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 					MPPaymentMethod *p = paymentMethods[0];
 					
 					if([p.exceptionsByCardIssuer count] > 0){
-						//Only possible in ARGENTINA. Sometimes we can't identify the issuer of some Mastercards
-						//so we will send in p.payerCosts the default configuration
-						//and in p.exceptionsByCardIssuer you will have all the possible issuers with "promos".
-						//If this happens, let your customer choose the credit card issuer. 
-						//Then use the payer costs from that issuer.
-						//For example, if he chooses the first issuer in the exceptions: 
-						//[p.exceptionsByCardIssuer[0].payerCosts]
+						/*
+							Only possible in ARGENTINA. Sometimes we can't identify the issuer of some Mastercards
+							so we will send in p.payerCosts the default configuration
+							and in p.exceptionsByCardIssuer you will have all the possible issuers with "promos".
+							If this happens, let your customer choose the credit card issuer. 
+							Then use the payer costs from that issuer.
+							> For example, if he chooses the first issuer in the exceptions: 
+								p.exceptionsByCardIssuer[0].payerCosts
+							> If he chooses "other", then use the default:
+								p.payerCosts
+						*/
 					}else{
 						//The common case
 						[self showInstallmentsForPaymentMethod: p andAmount: ##replace with your amount##];
