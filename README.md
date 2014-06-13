@@ -164,7 +164,7 @@ Tip: You can do this in your 'AppDelegate' in 'application:didFinishLaunchingWit
 		]
 
 
-* *NOTE*: if you are collecting payments in Argentina with Mastercard, then you need to read this link (coming soon).
+* _NOTE_: if you are collecting payments in Argentina with Mastercard, then you need to read this link (coming soon).
 
 #### Installments: México
 
@@ -289,7 +289,7 @@ These methods follow the validation method convention used by [key-value validat
 
 When using these validation methods, you will want to set the property on your card object when a property does validate before validating the next property.  This allows the methods to use existing properties on the card correctly to validate a new property.  For example, validating '5' for the 'expirationMonth' property will return YES if no 'expirationYear' is set.  But if 'expirationYear' is set and you try to set 'expirationMonth' to 5 and the combination of 'expirationMonth' and 'expirationYear' is in the past, '5' will not validate.  The order in which you call the validate methods does not matter for this though.
 
-* *Hint*: When you have at least 6 digits inside MPCard object, you can retrieve payment method info from our API. Doing this you will feed the validators with extra data, so validations will be more accurate.
+* _Hint_: When you have at least 6 digits inside MPCard object, you can retrieve payment method info from our API. Doing this you will feed the validators with extra data, so validations will be more accurate.
 		
 		[card fillPaymentMethods];
 		//--OR--
