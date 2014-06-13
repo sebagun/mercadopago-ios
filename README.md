@@ -293,8 +293,8 @@ When using these validation methods, you will want to set the property on your c
 		
 		[card fillPaymentMethods];
 		//--OR--
-		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *){
+		[card fillPaymentMethodsExecutingOnSuccess:^(NSArray *paymentMethods){
 														//...
-													} onFailure:^(NSError *){
+													} onFailure:^(NSError *error){
 														//...
 													}];
