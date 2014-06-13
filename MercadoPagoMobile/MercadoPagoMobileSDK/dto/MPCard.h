@@ -33,9 +33,16 @@
  > Gets the possible payment methods using the card bin (first six numbers).
  > Normally it will return just one. Just in México, in some cases it will return more than one if the API can't tell
  if the bin belongs to a debit card or credit card.
- > Calling this you feed the built-in validators with more info.
+ > When calling this method, you feed the built-in validators with more info. Validations will be more accurate
  */
 -(void) fillPaymentMethodsExecutingOnSuccess:(void (^)(NSArray *)) success onFailure:(void (^)(NSError *)) failure;
+/*
+  Just get possible payment methods without callback. Is done async.
+  When you get at least 6 digits in your textfield, assign the value to cardNumber and call this.
+  It's useful for validating your customer input as he types.
+  > When calling this method, you feed the built-in validators with more info. Validations will be more accurate
+ */
+-(void) fillPaymentMethods;
 /*
  The payment methods also remain available outside the completion handler using the getter.
  */

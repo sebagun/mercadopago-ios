@@ -28,6 +28,11 @@
  Once you get a valid card number, enable the next button
  */
 - (IBAction)creditCardNumberTyped:(UITextField *)sender {
+    if (sender.text.length > 5) {
+        //once I have at least 6 digits, start getting payment method info for better validations
+        self.card.cardNumber = sender.text;
+        [self.card fillPaymentMethods];
+    }
     NSError *validationError;
     NSString *textRef = sender.text;
     [self.nextButton setEnabled:[self.card validateCardNumber:&textRef error:&validationError]];
@@ -49,8 +54,6 @@
 {
     [super viewDidLoad];
     
-    self.card = [[MPCard alloc] init];
-    
     [self.nextButton setEnabled:NO];
     
     //hide keyboard when touching outside a text field
@@ -66,6 +69,17 @@
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 30.f)];
     [toolbar setItems:[NSArray arrayWithObjects:flexableItem,doneItem, nil]];
     self.numberTextField.inputAccessoryView = toolbar;
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.card = [[MPCard alloc] init];
+    
+    NSString *textRef = self.numberTextField.text;
+    [self.nextButton setEnabled:[self.card validateCardNumber:&textRef error:nil]];
+    
 }
 
 //just fancy stuff for showing/hiding the keyboard

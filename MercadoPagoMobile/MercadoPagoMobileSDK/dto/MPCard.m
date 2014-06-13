@@ -37,23 +37,48 @@
     if (![MPUtils isNumericString:ioValueString] || ioValueString.length < 10 || ioValueString.length > 19) {
         return [[self class] handleValidationErrorForParameter:@"cardNumber" error:outError];
     }
+    
+    if (self.paymentMethods) {
+        BOOL match = NO;
+        for (MPPaymentMethod *p in self.paymentMethods) {
+            for (MPCardConfiguration *c in p.cardConfiguration) {
+                match = match || (ioValueString.length == c.cardNumberLength.integerValue && ([c.luhnAlgorithm isEqualToString:@"none"] || [MPUtils isLuhnValidString:ioValueString]));
+            }
+        }
+        if (!match) {
+            return [[self class] handleValidationErrorForParameter:@"cardNumber" error:outError];
+        }
+    }
     return YES;
 }
 
 - (BOOL)validateSecurityCode:(id *)ioValue error:(NSError **)outError
 {
-    if (*ioValue == nil) {
-        //Some credit cards do not require CVC
-        //TODO: better validation, first get payment method data from API to know the card configuration
-        return YES;
-    }
-    NSString *ioValueString = (NSString *) *ioValue;
-    
-    BOOL validLength = ([ioValueString length] >= 3 && [ioValueString length] <= 4);
-    
-    
-    if (![MPUtils isNumericString:ioValueString] || !validLength) {
-        return [[self class] handleValidationErrorForParameter:@"securityCode" error:outError];
+    if (self.paymentMethods) {
+        BOOL match = NO;
+        for (MPPaymentMethod *p in self.paymentMethods) {
+            for (MPCardConfiguration *c in p.cardConfiguration) {
+                match = match ||
+                        (c.securityCodeLength.integerValue == 0 && (*ioValue == nil || ((NSString *) *ioValue).length == 0)) ||
+                        (*ioValue != nil && c.securityCodeLength.integerValue == ((NSString *) *ioValue).length);
+            }
+        }
+        if (!match) {
+            return [[self class] handleValidationErrorForParameter:@"securityCode" error:outError];
+        }
+    }else{
+        if (*ioValue == nil) {
+            //Some credit cards do not require CVC
+            return YES;
+        }
+        NSString *ioValueString = (NSString *) *ioValue;
+        
+        BOOL validLength = ([ioValueString length] >= 3 && [ioValueString length] <= 4);
+        
+        
+        if (![MPUtils isNumericString:ioValueString] || !validLength) {
+            return [[self class] handleValidationErrorForParameter:@"securityCode" error:outError];
+        }
     }
     return YES;
 }
@@ -99,22 +124,49 @@
 
 - (BOOL)validateCardholderIDType:(id *)ioValue error:(NSError **)outError
 {
-    if (*ioValue == nil) {
-        //In mexico, all the cardholder identification info is optional.
-        //TODO: better validation by country of the credit card, need to get the payment method before
-        return YES;
+    if (self.paymentMethods) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@",@"cardholder_identification_type"];
+        BOOL match = NO;
+        for (MPPaymentMethod *p in self.paymentMethods) {
+            for (MPCardConfiguration *c in p.cardConfiguration) {
+                if (match) {
+                }else if ([c.additionalInfoNeeded filteredArrayUsingPredicate:predicate].count == 0  && (*ioValue == nil || ((NSString *) *ioValue).length == 0)){
+                    match = YES;
+                }else if ([c.additionalInfoNeeded filteredArrayUsingPredicate:predicate].count > 0 && *ioValue != nil && ((NSString *) *ioValue).length > 0){
+                    NSString *ioValueString = (NSString *) *ioValue;
+                    if ([p.siteId isEqualToString:@"MLA"] && [[MPUtils argentinaValidCardholderIDTypes] containsObject:ioValueString]) {
+                        match = YES;
+                    }else if ([p.siteId isEqualToString:@"MLB"] && [[MPUtils brasilValidCardholderIDTypes] containsObject:ioValueString]) {
+                        match = YES;
+                    }else if ([p.siteId isEqualToString:@"MLM"] && [[MPUtils mexicoValidCardholderIDTypes] containsObject:ioValueString]) {
+                        match = YES;
+                    }else if ([p.siteId isEqualToString:@"MLV"] && [[MPUtils venezuelaValidCardholderIDTypes] containsObject:ioValueString]) {
+                        match = YES;
+                    }else if ([p.siteId isEqualToString:@"MCO"] && [[MPUtils colombiaValidCardholderIDTypes] containsObject:ioValueString]) {
+                        match = YES;
+                    }
+                }
+            }
+        }
+        if (!match) {
+            return [[self class] handleValidationErrorForParameter:@"cardholderIDType" error:outError];
+        }
+    }else{
+        if (*ioValue == nil) {
+            //In mexico, all the cardholder identification info is optional.
+            return YES;
+        }
+        
+        NSString *ioValueString = (NSString *) *ioValue;
+        
+        if (![[MPUtils argentinaValidCardholderIDTypes] containsObject:ioValueString]   &&
+            ![[MPUtils brasilValidCardholderIDTypes] containsObject:ioValueString]      &&
+            ![[MPUtils venezuelaValidCardholderIDTypes] containsObject:ioValueString]   &&
+            ![[MPUtils mexicoValidCardholderIDTypes] containsObject:ioValueString]      &&
+            ![[MPUtils colombiaValidCardholderIDTypes] containsObject:ioValueString]) {
+            return [[self class] handleValidationErrorForParameter:@"cardholderIDType" error:outError];
+        }
     }
-    
-    NSString *ioValueString = (NSString *) *ioValue;
-    
-    if (![[MPUtils argentinaValidCardholderIDTypes] containsObject:ioValueString]   &&
-        ![[MPUtils brasilValidCardholderIDTypes] containsObject:ioValueString]      &&
-        ![[MPUtils venezuelaValidCardholderIDTypes] containsObject:ioValueString]   &&
-        ![[MPUtils mexicoValidCardholderIDTypes] containsObject:ioValueString]      &&
-        ![[MPUtils colombiaValidCardholderIDTypes] containsObject:ioValueString]) {
-        return [[self class] handleValidationErrorForParameter:@"cardholderIDType" error:outError];
-    }
-    
     return YES;
 }
 
@@ -218,6 +270,19 @@
         return;
     }
     
+    if (self.cardBinGuessed && [cardBin isEqualToString:self.cardBinGuessed]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                       ^(){
+                           success(self.paymentMethods);
+                       }
+                       );
+        return;
+    }
+    
+    if(self.paymentMethodCallInProgress){
+        return;
+    }
+    
     //Handle JSON success response from API
     MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
         NSArray *arr = (NSArray *)jsonArr;
@@ -228,17 +293,62 @@
         }
         self.paymentMethods = cleanArr;
         self.cardBinGuessed = cardBin;
+        self.paymentMethodCallInProgress = NO;
         success(cleanArr);
     };
     
     //Handle failure response from API or error
     MPFailureRequestHandler failureHandler = ^(id json, NSInteger statusCode, NSError *error){
+        self.paymentMethodCallInProgress = NO;
         if (error) {
             failure(error);
         }else{
             NSError *apiError = [MPUtils createErrorWithJSON:json HTTPstatus:statusCode userMessage:MPPaymentMethodApiCallErrorUserMessage];
             failure(apiError);
         }
+    };
+    
+    //GET payment method with the bin
+    MPJSONRestClient *client = [[MPJSONRestClient alloc] init];
+    [client getJSONFromUrl: [NSString stringWithFormat:@"https://api.mercadolibre.com/checkout/custom/payment_methods/search?public_key=%@&bin=%@",[MercadoPago publishableKey], [self cardBin]] onSuccess:s onFailure:failureHandler];
+    self.paymentMethodCallInProgress = YES;
+}
+
+-(void) fillPaymentMethods
+{
+    [MercadoPago validateKey];
+    
+    NSError *validationError;
+    NSString *cardBin = [self cardBin];
+    
+    if ([MPUtils validateCardBin:cardBin error:&validationError] && validationError) {
+        return;
+    }
+    
+    if (self.cardBinGuessed && [cardBin isEqualToString:self.cardBinGuessed]) {
+        return;
+    }
+    
+    if(self.paymentMethodCallInProgress){
+        return;
+    }
+    
+    //Handle JSON success response from API
+    MPSuccessRequestHandler s = ^(id jsonArr, NSInteger statusCode){
+        NSArray *arr = (NSArray *)jsonArr;
+        NSMutableArray *cleanArr = [[NSMutableArray alloc] initWithCapacity:[arr count]];
+        for (NSDictionary *paymentMethodJSON in arr) {
+            MPPaymentMethod *p = [[MPPaymentMethod alloc]initFromDictionary:paymentMethodJSON];
+            [cleanArr addObject:p];
+        }
+        self.paymentMethods = cleanArr;
+        self.cardBinGuessed = cardBin;
+        self.paymentMethodCallInProgress = NO;
+    };
+    
+    //Handle failure response from API or error
+    MPFailureRequestHandler failureHandler = ^(id json, NSInteger statusCode, NSError *error){
+        self.paymentMethodCallInProgress = NO;
     };
     
     //GET payment method with the bin

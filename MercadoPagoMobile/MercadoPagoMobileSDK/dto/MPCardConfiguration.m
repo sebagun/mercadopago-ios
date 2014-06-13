@@ -16,7 +16,7 @@
         self.binCardPattern = [dict objectForKey:@"bin_card_pattern"];
         self.binCardExclusionPattern = [dict objectForKey:@"bin_card_exclusion_pattern"];
         self.cardNumberLength = [[[NSNumberFormatter alloc]init]numberFromString:[dict objectForKey:@"card_number_length"]];
-        self.securityCodeLength = [dict objectForKey:@"security_code_lenght"];
+        self.securityCodeLength = [dict objectForKey:@"security_code_length"];
         self.luhnAlgorithm = [dict objectForKey:@"luhn_algorithm"];
         self.installmentBinsPattern = [dict objectForKey:@"installment_bins_pattern"];
         self.additionalInfoNeeded = [dict objectForKey:@"additional_info_needed"];
