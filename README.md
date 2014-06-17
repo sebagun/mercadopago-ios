@@ -18,7 +18,7 @@ There are two ways to add MercadoPago to your project:
 
 1. Clone this repository ('git clone --recursive')
 1. Open your project in xcode. In the menubar, click on 'File' then 'Add files to "Project"...'
-1. Select the 'MercadoPagoMobileSDK' directory in your cloned mpmobile-ios_sdk repository
+1. Select the 'MercadoPagoMobileSDK' directory in your cloned mercadopago-ios repository
 1. Make sure "Copy items into destination group's folder (if needed)" is checked
 1. Click "Add"
 
