@@ -231,9 +231,10 @@
     
     //Include device info for fraud prevention. If you remove this, you will have more payments rejections.
     NSDictionary *fingerprint = [[UIDevice currentDevice] fingerPrint];
-    NSDictionary *deviceInfo = [NSDictionary dictionaryWithObject:fingerprint forKey:@"fingerprint"];
+    NSMutableDictionary *deviceInfo = [NSMutableDictionary dictionaryWithObject:fingerprint forKey:@"value"];
+    [deviceInfo setObject:@"fingerprint" forKey:@"type"];
     NSArray *deviceArray = [NSArray arrayWithObject:deviceInfo];
-    [json setObject:deviceArray forKey:@"device_info"];
+    [json setObject:deviceArray forKey:@"device"];
     
     return json;
 }
