@@ -1,6 +1,6 @@
 # MercadoPago iOS SDK
 
-The MercadoPago iOS SDK make it easy to collect your users' credit card details inside your iOS app. By creating [tokens](https://coming-soon), MercadoPago handles the bulk of PCI compliance by preventing sensitive card data from hitting your server.
+The MercadoPago iOS SDK make it easy to collect your users' credit card details inside your iOS app. By creating [tokens](https://www.mercadopago.com.ar/developers/en/api-docs/custom-checkout/card-tokens/), MercadoPago handles the bulk of PCI compliance by preventing sensitive card data from hitting your server.
 
 It is developed for iOS 7 or sooner.
 
@@ -32,7 +32,15 @@ Coming soon. We are building it. See the 'example' folder under your own risk =)
 
 ## Integration
 
-First, you need a publishable key to collect a token. Send an e-mail to developers@mercadopago.com with your user and your test users e-mails in order to request the 'public_key' which will identify you when submitting credit card data to our system.
+First, you need a publishable key to collect a token. Get it in the following address:
+
+* Argentina: [https://www.mercadopago.com/mla/account/credentials](https://www.mercadopago.com/mla/account/credentials)
+* Brazil: [https://www.mercadopago.com/mlb/account/credentials](https://www.mercadopago.com/mlb/account/credentials)
+* Colombia: [https://www.mercadopago.com/mco/account/credentials](https://www.mercadopago.com/mco/account/credentials)
+* Mexico: [https://www.mercadopago.com/mlm/account/credentials](https://www.mercadopago.com/mlm/account/credentials)
+* Venezuela: [https://www.mercadopago.com/mlv/account/credentials](https://www.mercadopago.com/mlv/account/credentials)
+
+This 'public_key' will identify you when submitting credit card data to our system.
 
 Once you have it:
 
